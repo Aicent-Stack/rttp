@@ -21,7 +21,7 @@ pub struct PulseFrameHeader {
     pub task_id: u128,               // UUID for end-to-end tracing
     pub semantic_hash: u64,          // MurmurHash3 of semantic affinity vector
     pub context_snapshot_id: u64,    // Shard version for KV reassembly
-    pub rpk_fingerprint: Fingerprint,// 32-byte immutable RPKI identity
+    pub rpki_fingerprint: Fingerprint,// 32-byte immutable RPKI identity
     pub zcmk_bid: TokenMicro,        // Embedded nanosecond auction token
     pub payload_len: u32,            // Bytes after header (delta only)
     pub fec_parity: u16,             // Reed-Solomon parity symbols
@@ -44,7 +44,7 @@ impl PulseFrameHeader {
             task_id,
             semantic_hash,
             context_snapshot_id: 0,      // incremented per shard
-            rpk_fingerprint: rpkid::current_node_fingerprint(),
+            rpki_fingerprint: rpkid::current_node_fingerprint(),
             zcmk_bid: zcmk::current_micro_bid(),
             payload_len: payload_len as u32,
             fec_parity: 4,
@@ -67,7 +67,7 @@ fn on_pulse_received(frame: &[u8]) {
     let header = unsafe { &*(frame.as_ptr() as *const PulseFrameHeader) };
     if header.magic != 0x5254_5450 { return; }
     // RPKI verify (constant time)
-    if !rpkid::verify(&header.rpk_fingerprint) { return; }
+    if !rpkid::verify(&header.rpki_fingerprint) { return; }
     // Instant semantic route
     semantic_router::dispatch(header.semantic_hash, &frame[64..]);
     // KV delta apply (lock-free)
