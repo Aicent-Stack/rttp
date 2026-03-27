@@ -1,12 +1,13 @@
-# 🧠 Aicent Stack: The Sovereign AI Nervous System
+# 💎 rttp — The Nerves of Aicent Stack
 
-# rttp — The Nerves of Aicent Stack
  ⚪ **AICENT**  💎 **RTTP**  🔴 **RPKI**  🟢 **ZCMK**  🟡 **GTIOT** 
 <p align="left">
   <code> 🛠️ Build: Passing </code> &nbsp; 
   <code> 🦀 Language: Rust </code> &nbsp; 
   <code> 🛡️ Status: EVOLVING </code>
 </p>
+
+![RTTP-01](https://github.com/user-attachments/assets/e59ba949-883e-4fdb-acd3-626688c047fd)
 
 Real-Time Transport Protocol (RTTP) for AI-native communication. Sub-ms context synchronization and semantic multicast frames. Ending the Latency Tax.
 
