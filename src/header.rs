@@ -3,7 +3,7 @@
 // Purpose: Sub-ms asynchronous pulse frame synchronization for Sovereign AI.
 // Status: RFC-001 Draft. 
 // License: Apache-2.0 or MIT.
-// rttp_pulse.rs — core of the nervous system
+// rttp-nerves/src/header.rs — the neural backbone of the Aicent Stack
 use std::net::SocketAddr;
 use std::time::{SystemTime, UNIX_EPOCH};
 use serde::{Serialize, Deserialize};
