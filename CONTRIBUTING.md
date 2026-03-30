@@ -19,3 +19,5 @@ cargo check
 ```
 ## We welcome contributions to code, documentation, benchmarks, and edge-node testing.
 SYSTEM STATUS: EVOLVING
+
+### 🛡️ All contributions are protected under the Apache-2.0 License via Aicent.com Organization.
