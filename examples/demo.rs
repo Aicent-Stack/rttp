@@ -1,5 +1,9 @@
-//! RTTP Nerves Demo
-//! <800μs Pulse Frame Millisecond-level memory snapshot demonstration
+// Aicent Stack | RTTP (Real-Time Transfer Protocol)
+// Domain: https://rttp.com
+// Purpose: Sub-millisecond Asynchronous Pulse Frame Transmission
+// Specification: RFC-002 Draft. 
+// License: Apache-2.0 via Aicent.com Organization.
+//! # RFC-002 Demo: Pulse Frame Serialization & Zero-copy Receive
 
 use rttp::header::{PulseFrame, FrameType};
 
