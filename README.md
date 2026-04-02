@@ -1,5 +1,6 @@
-# 💎 rttp — The Nerves of Aicent Stack
+Aicent Stack • Sovereign AI Nervous System
 
+# 💎 rttp — The Nerves of Aicent Stack
 ⚪ AICENT 💎 RTTP 🔴 RPKI 🟢 ZCMK 🟡 GTIOT
 
 **Stateful Semantic Multicast & Pulse-Frame Transport Protocol [RFC-002]**
