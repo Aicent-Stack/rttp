@@ -1,4 +1,4 @@
-# 💎 rttp: The Nerves of Aicent Stack
+# 💎 rttp — The Nerves of Aicent Stack
 
 ⚪ AICENT 💎 RTTP 🔴 RPKI 🟢 ZCMK 🟡 GTIOT
 
