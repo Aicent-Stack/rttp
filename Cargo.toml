@@ -1,22 +1,22 @@
 [package]
 name = "rttp"
-description = "RTTP: Sub-millisecond Neural Transport Protocol & Stateful Semantic Multicast [RFC-002]"
+description = "RTTP: Sub-millisecond Neural Transport and Stateful Semantic Multicast Protocol [RFC-002]"
 version.workspace = true
-edition.workspace = true
-authors.workspace = true
-license.workspace = true
-repository.workspace = true
-homepage = "http://rttp.com"
+edition = "2024" # Explicitly set edition to 2024 for full compatibility
+authors = ["Aicent Stack Team <lee@aicent.com>"]
+license = "Apache-2.0"
+repository = "https://github.com/Aicent-Stack/rttp" # Point to its own independent repository
+homepage = "https://rttp.com"
 documentation = "https://github.com/Aicent-Stack/manifesto/blob/main/rfcs/RFC-002-RTTP-NERVES.md"
-keywords = ["neural-transport", "low-latency", "rfc-002", "pulse-frame", "multicast"]
+keywords = ["neural-transport", "low-latency", "rfc-002", "pulse-frame", "multicast", "carrier-grade"]
 categories = ["network-programming", "asynchronous", "embedded"]
-rust-version = "1.85"
+rust-version = "1.85" # Explicitly set rust-version to 1.85 for consistency
 
 [dependencies]
 # --- Core Neural Transport Primitives (L0 Backbone) ---
-# RTTP acts as the foundational physical layer. Higher-order functions 
-# like Immunity (RPKI) and Blood (ZCMK) are integrated via the Orchestration Layer
-# to maintain a strict, unidirectional architectural dependency graph.
+# RTTP acts as the foundational physical layer. It's a pure, agnostic transport.
+# Higher-order functions like Immunity (RPKI) and Blood (ZCMK) are integrated 
+# via the Orchestration Layer (AICENT) to maintain unidirectional dependency.
 
 serde = { workspace = true, features = ["derive"] }
 anyhow = { workspace = true }
@@ -26,17 +26,38 @@ bytes = { workspace = true, features = ["serde"] }
 smallvec = { workspace = true, features = ["serde"] }
 
 # --- High-Performance Asynchronous Routing ---
+# Tokio features optimized for real-time neural dispatch.
 tokio = { workspace = true, features = ["net", "rt", "sync"] }
-# Lock-free shunting for nanosecond dispatch between neural nodes
-crossbeam = { workspace = true }
-crossbeam-channel = { workspace = true }
-crossbeam-queue = { workspace = true }
-once_cell = { workspace = true }
-tracing = { workspace = true } # Industrial-grade telemetry for nervous impulses
+crossbeam = { workspace = true } # Lock-free shunting for nanosecond dispatch
+crossbeam-channel = { workspace = true } # High-frequency inter-organ messaging
+crossbeam-queue = { workspace = true } # Nanosecond-speed frame queues
+once_cell = { workspace = true } # Safe static initialization of global manifolds
+tracing = { workspace = true }   # Industrial-grade telemetry for nervous impulses
 
-# --- Hardware Affinity ---
-# [RFC-005] Pre-configured for Embassy executor for hard real-time loops
-embassy-executor = { workspace = true, optional = true }
+# --- Optional/Feature-gated Core Organism Linking ---
+# These are used by higher-level orchestration, but RTTP itself does not directly depend on their full functionality.
+rpki = { workspace = true, optional = true, features = ["std"] } 
+zcmk = { workspace = true, optional = true, features = ["std"] } 
+embassy-executor = { workspace = true, optional = true } # For embedded feature
+embassy-time = { workspace = true, optional = true }     # For embedded feature
+
+[features]
+default = ["std"]
+# [Standard v1.0] Standard library support for general-purpose compute.
+# Explicitly re-exporting 'std' for all foundational dependencies.
+std = [
+    "serde/std", "anyhow/std", 
+    "tokio/full", # Include full tokio for std-compat
+    "bytes/std", "smallvec/std", # Explicitly pull std for these
+    # Re-export std for optional features, only if they are enabled
+    "rpki/std", "zcmk/std", 
+    # "embassy-executor/std", "embassy-time/std" # Embassy std features are not always needed
+]
+
+# [RFC-002] Feature flag for bare-metal/embedded hardware offloading
+embedded = ["embassy-executor", "embassy-time"] # Explicitly list direct dependencies
+# [RFC-002] Hook for future XDP/DPDK/RDMA hardware acceleration
+hardware-accelerated = []
 
 [dev-dependencies]
 # Performance benchmarking for <420µs sync targets
