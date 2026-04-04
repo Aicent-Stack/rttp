@@ -1,24 +1,51 @@
 [package]
 name = "rttp"
-description = "RTTP: Sub-millisecond Neural Transport Protocol [RFC-002]"
+description = "RTTP: Sub-millisecond Neural Transport Protocol & Stateful Semantic Multicast [RFC-002]"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
 license.workspace = true
 repository.workspace = true
+homepage = "https://rttp.com"
+documentation = "https://github.com/Aicent-Stack/manifesto/blob/main/rfcs/RFC-002-RTTP-NERVES.md"
+keywords = ["neural-transport", "low-latency", "rfc-002", "pulse-frame", "multicast"]
+categories = ["network-programming", "asynchronous", "embedded"]
+rust-version = "1.75"
 
 [dependencies]
-# --- High-Performance Primitives ---
-serde = { workspace = true, features = ["derive"] }
-anyhow.workspace = true
-bytes.workspace = true
+# --- Core Reflex Trinity ---
+# Integrating Immunity (RPKI) and Blood (ZCMK) primitives at the wire level
+rpki.workspace = true
+zcmk.workspace = true
+
+# --- Performance & Memory Primitives ---
+# Bytes for zero-copy buffer management (critical for Pulse Frame efficiency)
+bytes = { workspace = true, features = ["serde"] }
+smallvec = { workspace = true, features = ["serde"] }
+# Lock-free shunting for nanosecond dispatch between neural nodes
+crossbeam = { workspace = true }
+crossbeam-channel = { workspace = true }
+crossbeam-queue = { workspace = true }
+
+# --- Async & Telemetry ---
 tokio = { workspace = true, features = ["net", "rt", "sync"] }
-smallvec.workspace = true
-crossbeam.workspace = true
-once_cell.workspace = true
+serde = { workspace = true, features = ["derive"] }
+anyhow = { workspace = true }
+tracing = { workspace = true } # Industrial-grade telemetry for nervous impulses
+
+# --- Hardware Affinity ---
+# [RFC-005] Pre-configured for Embassy executor for hard real-time loops
+embassy-executor = { workspace = true, optional = true }
 
 [features]
 default = ["std"]
-std = ["serde/std", "anyhow/std"]
-# [RFC-002] Placeholder for future XDP/DPDK acceleration features
+# Standard library support for general-purpose compute
+std = ["serde/std", "anyhow/std", "tokio/full"]
+# [RFC-002] Feature flag for bare-metal/embedded hardware offloading
+embedded = ["embassy-executor", "no-std-compat"]
+# [RFC-002] Placeholder for future XDP/DPDK/RDMA hardware acceleration
 hardware-accelerated = []
+
+[dev-dependencies]
+# Performance benchmarking for <420µs targets
+criterion = { version = "0.5", features = ["async_tokio"] }
