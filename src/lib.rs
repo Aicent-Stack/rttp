@@ -10,76 +10,88 @@
 //! pulse-frame architecture designed for AI-native workloads across a six-domain organism.
 //!
 //! ### Core Nerves Logic:
-//! - **Stateful Semantic Multicast**: Routing via Task Affinity (RFC-001) instead of IPs.
-//! - **Context Snapshot Sharding**: Sub-ms synchronization of Transformer KV-caches.
-//! - **Reflex Trinity**: Direct wire-level integration of RPKI (RFC-003) and ZCMK (RFC-004).
-//! - **Kinetic Resonance**: Ensuring temporal alignment for Hive-scale coordination (RFC-006).
+//! - **Stateful Semantic Multicast**: Routing via Task Affinity (RFC-001) instead of legacy IP vectors.
+//! - **Context Snapshot Sharding**: Sub-ms synchronization of high-dimensional KV-caches.
+//! - **Reflex Trinity**: Wire-level integration of Security (RFC-003) and Economics (RFC-004).
+//! - **Kinetic Resonance**: Ensuring temporal parity for planetary Hive coordination (RFC-006).
 
 #![deny(missing_docs)]
+// SAFETY: Unsafe is strictly constrained to zero-copy memory casting for 
+// hardware-accelerated NIC offloading.
 #![allow(unsafe_code)]
 
 /// [RFC-002] Core Header Definitions
+/// Contains the 64-byte, cache-aligned Pulse Frame specification.
 pub mod header;
 
-pub use crate::header::{PulseFrameHeader, on_pulse_received};
+pub use crate::header::{on_pulse_received, PulseFrameHeader};
 
 /// [RFC-002] Neural Transmission Error Set
-/// Defines physical and logical failure modes within the neural spine.
+/// Defines the critical physical and logical failure modes within the neural spine.
 #[derive(Debug, Clone, PartialEq)]
 pub enum NerveError {
-    /// Network jitter exceeded the 100µs deterministic threshold
+    /// Network jitter exceeded the 50µs kinetic resonance threshold (RFC-006).
     JitterLimitExceeded,
-    /// Semantic Multicast failed to find an affinity group
+    /// Semantic Multicast failed to identify an active affinity group.
     RoutingAnomaly,
-    /// Forward Error Correction (FEC) failed to recover the payload
+    /// Forward Error Correction (FEC) failed to recover the damaged tensor payload.
     PulseCorruption,
-    /// Neural sever: RTTP heartbeat timeout (>3ms)
+    /// Neural sever: RTTP heartbeat timeout detected by the physical edge (>3ms).
     NeuralSeverance,
 }
 
 /// [RFC-002] Pulse Bundle
-/// A complete atomic unit of neural transmission, containing the 64-byte 
-/// header and the variable-length tensor payload.
+/// A complete atomic unit of neural transmission.
+/// It binds the 64-byte protocol envelope to the variable-length tensor manifold.
 #[derive(Debug, Clone)]
 pub struct PulseBundle {
-    /// The fixed 64-byte RPKI/ZCMK-integrated header
+    /// The fixed 64-byte RPKI/ZCMK-integrated header.
     pub header: PulseFrameHeader,
-    /// The raw tensor manifold or instruction shard
+    /// The raw tensor manifold or cognitive instruction shard.
     pub payload: Vec<u8>,
 }
 
 /// [RFC-002] Neural Spine Interface
-/// Defines the behavior of the transport backbone for the Aicent Stack.
+/// Defines the behavioral contract for the transport backbone of the Aicent Stack.
 pub trait NeuralSpine {
-    /// Emits a high-frequency pulse into the Aicent.net Grid (RFC-006).
+    /// Emits a high-frequency pulse into the Aicent.net operational grid.
     fn emit_pulse(&self, bundle: PulseBundle) -> Result<(), NerveError>;
     
-    /// Ingests an inbound pulse from the RTTP spine with zero-copy dispatch.
+    /// Ingests an inbound pulse from the RTTP spine utilizing zero-copy dispatch.
     fn ingest_pulse(&self) -> Result<PulseBundle, NerveError>;
     
-    /// Synchronizes the local monotonic clock for Kinetic Resonance alignment.
+    /// Synchronizes the local monotonic clock to ensure Kinetic Resonance alignment.
     fn calibrate_clock(&self) -> u32;
 }
 
-/// [RFC-003] Quarantine Reflex
-/// High-priority interface for RPKI to isolate pathogens instantly.
-/// Injects a Priority 255 frame into the neural spine to cut off the node.
-pub fn emit_quarantine_pulse(pathogen_fingerprint: &[u8; 32], _reason: u16) {
-    println!("\x1b[1;31m[RTTP-SHIELD]\x1b[0m 🚨 Quarantine pulse emitted for 0x{:02x?}. Pathogen isolated.", &pathogen_fingerprint[..4]);
+/// [RFC-003] Quarantine Reflex Emission
+/// High-priority interface utilized by the Immune Pipeline (RPKI) to 
+/// surgically isolate pathogens from the nervous system.
+/// 
+/// [REFLEX] Injects a Priority 255 frame into the RTTP spine, achieving 
+/// global isolation in <300µs.
+pub fn emit_quarantine_pulse(pathogen_fingerprint: &[u8; 32], reason: u16) {
+    println!(
+        "\x1b[1;31m[RTTP-SHIELD]\x1b[0m 🚨 QUARANTINE_PULSE [Reason: 0x{:02x}] emitted for AID 0x{:02x?}. Pathogen isolated.", 
+        reason, &pathogen_fingerprint[..4]
+    );
 }
 
-/// [Standard v1.0] Target Performance Metrics
-/// These constants define the physical requirements for RTTP compliance.
+// --- Protocol Performance Anchors ---
+
+/// [Standard v1.0] Target KV-Sync Latency for planetary scale (Microseconds).
 pub const TARGET_LATENCY_US: u32 = 420;
-/// Jitter limit for Kinetic Resonance (RFC-006)
+/// [Standard v1.0] Maximum jitter limit for Kinetic Resonance (RFC-006).
 pub const TARGET_JITTER_US: u32 = 50; 
 
-/// [Standard v1.0] Protocol Constants
+// --- Protocol Identifiers ---
+
+/// [Standard v1.0] Protocol Magic Number identifier (0x5254_5450 == "RTTP").
 pub const RTTP_MAGIC: u32 = 0x5254_5450; 
-/// [Standard v1.0] Protocol Version
+/// [Standard v1.0] The current active version of the RTTP specification.
 pub const PROTOCOL_VERSION: &str = "1.0.0-standard-active";
 
-/// High-fidelity telemetry marker for neural pulses.
+/// High-fidelity telemetry marker for sub-millisecond neural events.
 pub fn log_neural_event(msg: &str) {
     println!("\x1b[1;36m[RTTP-NERVES]\x1b[0m ⚡ {}", msg);
 }
