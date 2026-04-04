@@ -1,6 +1,6 @@
 [package]
 name = "rttp"
-description = "RTTP: Sub-millisecond Neural Transport and Stateful Semantic Multicast Protocol [RFC-002]"
+description = "RTTP: Sub-millisecond Neural Transport Protocol & Stateful Semantic Multicast [RFC-002]"
 version.workspace = true
 edition.workspace = true
 authors.workspace = true
@@ -13,34 +13,40 @@ categories = ["network-programming", "asynchronous", "embedded"]
 rust-version = "1.75"
 
 [dependencies]
-# --- Reflex Trinity Integration ---
-# RTTP explicitly orchestrates Identity (RPKI) and Value (ZCMK) at the wire level.
-rpki = { workspace = true }
-zcmk = { workspace = true }
+# --- Core Neural Transport Primitives (L0 Backbone) ---
+# RTTP acts as the foundational physical layer. Higher-order functions 
+# like Immunity (RPKI) and Blood (ZCMK) are integrated via the Orchestration Layer
+# to maintain a strict, unidirectional architectural dependency graph.
 
-# --- High-Performance Neural Primitives ---
-# bytes and smallvec are critical for Zero-Copy / Zero-Allocation pulse handling.
 serde = { workspace = true, features = ["derive"] }
 anyhow = { workspace = true }
+# [PERF] Zero-copy buffer management critical for 64-byte Pulse Frames
 bytes = { workspace = true, features = ["serde"] }
+# [PERF] Stack-allocated pulse fragments to prevent heap-jitter
 smallvec = { workspace = true, features = ["serde"] }
-tokio = { workspace = true, features = ["net", "rt", "sync"] }
 
-# --- Nervous System Infrastructure ---
+# --- High-Performance Asynchronous Routing ---
+tokio = { workspace = true, features = ["net", "rt", "sync"] }
+# Lock-free shunting for nanosecond dispatch between neural nodes
 crossbeam = { workspace = true }
 crossbeam-channel = { workspace = true }
 crossbeam-queue = { workspace = true }
 once_cell = { workspace = true }
-tracing = { workspace = true } # Telemetry for sub-ms pulse monitoring
+tracing = { workspace = true } # Industrial-grade telemetry for nervous impulses
+
+# --- Hardware Affinity ---
+# [RFC-005] Pre-configured for Embassy executor for hard real-time loops
+embassy-executor = { workspace = true, optional = true }
 
 [features]
 default = ["std"]
-std = ["serde/std", "anyhow/std", "rpki/std", "zcmk/std"]
-# [RFC-002] Placeholder for bare-metal/embedded hardware drivers
-embedded = []
-# [RFC-002] Hook for future hardware offloading (DPDK/RDMA/eBPF)
+# Standard library support for general-purpose compute
+std = ["serde/std", "anyhow/std", "tokio/full"]
+# [RFC-002] Feature flag for bare-metal/embedded hardware offloading
+embedded = ["embassy-executor", "no-std-compat"]
+# [RFC-002] Placeholder for future XDP/DPDK/RDMA hardware acceleration
 hardware-accelerated = []
 
 [dev-dependencies]
-# Benchmarking for <420µs sync targets
+# Performance benchmarking for <420µs sync targets
 criterion = { workspace = true }
