@@ -10,7 +10,7 @@ homepage = "http://rttp.com"
 documentation = "https://github.com/Aicent-Stack/manifesto/blob/main/rfcs/RFC-002-RTTP-NERVES.md"
 keywords = ["neural-transport", "low-latency", "rfc-002", "pulse-frame", "multicast"]
 categories = ["network-programming", "asynchronous", "embedded"]
-rust-version = "1.75"
+rust-version = "1.85"
 
 [dependencies]
 # --- Core Neural Transport Primitives (L0 Backbone) ---
