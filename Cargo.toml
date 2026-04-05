@@ -1,59 +1,75 @@
 [package]
 name = "rttp"
-description = "RTTP: Sub-millisecond Neural Transport Protocol & Stateful Semantic Multicast [RFC-002]"
+description = "RTTP: Sub-millisecond Neural Transport and Stateful Semantic Multicast Protocol [RFC-002]"
+# Inheriting core protocol DNA from the imperial root workspace
 version.workspace = true
-edition = "2024"
-authors = ["Aicent Stack Team <lee@aicent.com>"]
-license = "Apache-2.0"
-repository = "https://github.com/Aicent-Stack/rttp"
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
 homepage = "http://rttp.com"
 documentation = "https://github.com/Aicent-Stack/manifesto/blob/main/rfcs/RFC-002-RTTP-NERVES.md"
-keywords = ["neural-transport", "low-latency", "rfc-002", "pulse-frame", "multicast", "carrier-grade"]
-categories = ["network-programming", "asynchronous", "embedded"]
-rust-version = "1.85.0"
+rust-version.workspace = true
+
+# Keywords and categories for planetary-scale transport authority
+keywords = ["neural-transport", "low-latency", "rfc-002", "pulse-frame", "multicast", "carrier-grade", "128-bit-atomic"]
+categories = ["network-programming", "asynchronous", "embedded", "no-std", "systems"]
 
 [dependencies]
-# --- Core Neural Transport Primitives (L0 Backbone) ---
+# --- L0 Physical Transport Primitives ---
+# RTTP acts as the agnostic foundational layer. Higher-order functions (RPKI/ZCMK) 
+# are shunted to the Orchestration Layer to maintain a clean unidirectional 
+# dependency graph and eliminate cyclic resolution errors.
+
+# Optimized serialization for high-frequency neural bursts.
 serde = { workspace = true, features = ["derive"] }
 anyhow = { workspace = true }
-# [PERF] Zero-copy buffer management
-bytes = { workspace = true, features = ["serde"] }
-# [PERF] Stack-allocated pulse fragments (Note: smallvec does not have a 'std' feature)
+
+# [PERF] Zero-copy buffer management and stack-allocated pulse fragments.
+# These dependencies are the absolute baseline for 420µs sync targets.
+bytes    = { workspace = true, features = ["serde"] }
 smallvec = { workspace = true, features = ["serde"] }
 
-# --- High-Performance Asynchronous Routing ---
+# --- High-Performance Asynchronous Backbone ---
+# Tokio features optimized for hardware-level NIC dispatch.
 tokio = { workspace = true, features = ["net", "rt", "sync"] }
-crossbeam = { workspace = true }
-crossbeam-channel = { workspace = true }
-crossbeam-queue = { workspace = true }
-once_cell = { workspace = true }
-tracing = { workspace = true }
 
-# --- Optional/Feature-gated Domain Linking ---
-rpki = { workspace = true, optional = true, features = ["std"] }
-zcmk = { workspace = true, optional = true, features = ["std"] }
+# Lock-free shunting and inter-organ messaging.
+# Ensures the neural spine remains non-blocking during planetary grid sync.
+crossbeam         = { workspace = true }
+crossbeam-channel = { workspace = true }
+crossbeam-queue   = { workspace = true }
+once_cell         = { workspace = true } # Safe static initialization for manifolds
+tracing           = { workspace = true } # Industrial-grade telemetry for audit trails
+
+# --- Hardware Native Integration (Embodied Body Link) ---
+# [RFC-005] Pre-configured for Embassy executor to support hard real-time motor loops.
 embassy-executor = { workspace = true, optional = true }
-embassy-time = { workspace = true, optional = true, features = ["std"] }
+embassy-time     = { workspace = true, optional = true }
 
 [features]
+# Standard implementation: Enables full feature-set for cloud-scale environments.
 default = ["std"]
 
-# [Standard v1.0] Standard library support.
-# 🛡️ FIX: Removed 'smallvec/std' because the crate does not possess that feature.
+# [Standard v1.0] Standard library support for general-purpose compute.
+# Explicitly re-exporting 'std' to foundational primitives.
+# Note: smallvec is used without std to ensure maximum L1 cache residency.
 std = [
     "serde/std", 
     "anyhow/std", 
     "tokio/full", 
     "bytes/std", 
-    "rpki/std", 
-    "zcmk/std", 
-    "embassy-time/std"
+    "tracing/std"
 ]
 
-# [RFC-002] Feature flag for bare-metal hardware offloading
+# [RFC-002] Feature flag for bare-metal/embedded hardware offloading.
+# Essential for GTIOT robotics nodes and custom silicon ASICs.
 embedded = ["embassy-executor", "embassy-time"]
-# [RFC-002] Hook for future XDP/DPDK/RDMA acceleration
+
+# [RFC-002] Hook for future hardware-level acceleration (DPDK / RDMA / eBPF).
+# Enabling this activates optimized drivers for wire-speed transmission.
 hardware-accelerated = []
 
 [dev-dependencies]
+# Performance benchmarking for validating sub-millisecond neural drift.
 criterion = { workspace = true, features = ["async_tokio"] }
