@@ -5,12 +5,12 @@ version.workspace = true
 edition = "2024" # Explicitly set edition to 2024 for full compatibility
 authors = ["Aicent Stack Team <lee@aicent.com>"]
 license = "Apache-2.0"
-repository = "https://github.com/Aicent-Stack/rttp" # Point to its own independent repository
+repository = "https://github.com/Aicent-Stack/rttp" # Points to its own independent repository
 homepage = "http://rttp.com"
 documentation = "https://github.com/Aicent-Stack/manifesto/blob/main/rfcs/RFC-002-RTTP-NERVES.md"
 keywords = ["neural-transport", "low-latency", "rfc-002", "pulse-frame", "multicast", "carrier-grade"]
 categories = ["network-programming", "asynchronous", "embedded"]
-rust-version = "1.85" # Explicitly set rust-version to 1.85 for consistency
+rust-version.workspace = true # Explicitly inherit rust-version for consistency
 
 [dependencies]
 # --- Core Neural Transport Primitives (L0 Backbone) ---
@@ -26,8 +26,7 @@ bytes = { workspace = true, features = ["serde"] }
 smallvec = { workspace = true, features = ["serde"] }
 
 # --- High-Performance Asynchronous Routing ---
-# Tokio features optimized for real-time neural dispatch.
-tokio = { workspace = true, features = ["net", "rt", "sync"] }
+tokio = { workspace = true, features = ["net", "rt", "sync"] } # Tokio features optimized for real-time neural dispatch
 crossbeam = { workspace = true } # Lock-free shunting for nanosecond dispatch
 crossbeam-channel = { workspace = true } # High-frequency inter-organ messaging
 crossbeam-queue = { workspace = true } # Nanosecond-speed frame queues
@@ -38,24 +37,23 @@ tracing = { workspace = true }   # Industrial-grade telemetry for nervous impuls
 # These are used by higher-level orchestration, but RTTP itself does not directly depend on their full functionality.
 rpki = { workspace = true, optional = true, features = ["std"] } 
 zcmk = { workspace = true, optional = true, features = ["std"] } 
-embassy-executor = { workspace = true, optional = true } # For embedded feature
-embassy-time = { workspace = true, optional = true }     # For embedded feature
+embassy-executor = { workspace = true, optional = true, features = ["std"] } # For embedded feature
+embassy-time = { workspace = true, optional = true, features = ["std"] }     # For embedded feature
 
 [features]
 default = ["std"]
 # [Standard v1.0] Standard library support for general-purpose compute.
-# Explicitly re-exporting 'std' for all foundational dependencies.
+# Explicitly re-exporting 'std' for internal Aicent Stack dependencies to avoid cyclic feature conflicts.
 std = [
-    "serde/std", "anyhow/std", 
-    "tokio/full", # Include full tokio for std-compat
-    "bytes/std", "smallvec/std", # Explicitly pull std for these
     # Re-export std for optional features, only if they are enabled
-    "rpki/std", "zcmk/std", 
-    # "embassy-executor/std", "embassy-time/std" # Embassy std features are not always needed
+    "rpki/std", 
+    "zcmk/std", 
+    "embassy-executor/std", 
+    "embassy-time/std" # Embassy std features are now explicitly pulled
 ]
 
 # [RFC-002] Feature flag for bare-metal/embedded hardware offloading
-embedded = ["embassy-executor", "embassy-time"] # Explicitly list direct dependencies
+embedded = ["embassy-executor", "embassy-time"] 
 # [RFC-002] Hook for future XDP/DPDK/RDMA hardware acceleration
 hardware-accelerated = []
 
