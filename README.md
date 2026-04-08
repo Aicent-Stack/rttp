@@ -2,15 +2,15 @@
 
 Aicent Stack • Sovereign AI Nervous System
 
-# 💎 rttp — The Nerves of Aicent Stack
-
-**Stateful Semantic Multicast & Pulse-Frame Transport Protocol [RFC-002]**
-
 [![RFC](https://img.shields.io/badge/RFC-002-cyan.svg)](https://github.com/Aicent-Stack/manifesto/blob/main/rfcs/RFC-002-RTTP-NERVES.md)
 [![Status](https://img.shields.io/badge/Status-Homeostasis-brightgreen.svg)](#)
 [![Org](https://img.shields.io/badge/Org-Aicent.com-blue.svg)](http://rttp.com)
 
 **⚪ [AICENT](http://aicent.com) | 💎 [RTTP](http://rttp.com) | 🔴 [RPKI](http://rpki.com) | 🟢 [ZCMK](http://zcmk.com) | 🟡 [GTIOT](http://gtiot.com) | 🟣 [AICENT-NET](http://aicent.net) | 🌿 [epoekie](http://epoekie.com)**
+
+# 💎 rttp — The Nerves of Aicent Stack
+
+**Stateful Semantic Multicast & Pulse-Frame Transport Protocol [RFC-002]**
 
 ![RTTP-01](https://github.com/user-attachments/assets/a673db49-74f0-47de-8692-e0bbbf594abd)
 
