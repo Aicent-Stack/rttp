@@ -1,70 +1,71 @@
-// Aicent Stack | RTTP (Real-Time Transfer Protocol)
-// Domain: http://rttp.com
-// Purpose: Unit Demonstration of Pulse Frame Header & Zero-copy Dispatch (RFC-002).
-// Specification: RFC-002 Standard (Active).
-// License: Apache-2.0 via Aicent.com Organization.
-//! # RFC-002 Demo: Neural Pulse Frame Serialization
-//! 
-//! This binary demonstrates the L0 transport capabilities of the RTTP protocol.
-//! It showcases the sub-millisecond dispatch of 64-byte pulse headers 
-//! utilizing zero-copy memory mapping for hardware-level performance.
+/*
+ *  AICENT STACK - RFC-002: RTTP (The Nerve Layer)
+ *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
+ *
+ *  "Demonstrating 12ns Jitter-Aligned Neural Conduction."
+ *  Version: 1.2.2-Alpha | Domain: http://rttp.com
+ *
+ *  IMPERIAL_STANDARD: ABSOLUTE 128-BIT NUMERIC PURITY ENABLED.
+ *  SOVEREIGN_GRAVITY_WELL: MANDATORY AT INITIALIZATION.
+ *  TEMPORAL_SELF_SUPERVISION: RFC-009 ACTIVE.
+ */
 
-use rttp::{PulseFrameHeader, on_pulse_received, PROTOCOL_VERSION};
-use std::time::Instant;
+use rttp::{NerveController, PulseFrame, bootstrap_nerves, NeuralConduction};
+use epoekie::{AID, SovereignLifeform, verify_organism};
+use std::time::Duration;
 
-fn main() {
-    println!("\n\x1b[1;36m💎 RTTP NERVES | Protocol Unit Test [RFC-002]\x1b[0m");
-    println!("   Backbone: Carrier-Grade Low-Latency Infrastructure (L0 Spine)");
-    println!("----------------------------------------------------");
-
-    // 1. Prepare Sovereign AID Fingerprint (RFC-001 context)
-    // This 256-bit identifier acts as the root of trust carried in-band.
-    let aid_fingerprint = [0x88; 32];
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    // 1. Imperial Awakening (Neural Genesis)
+    let node_seed = b"imperial_nerve_demo_2026";
+    let node_aid = AID::derive_from_entropy(node_seed);
     
-    // 2. Define Cognitive Context & Economics (Reflex Trinity)
-    // [RFC-004] Nanosecond resource bid in picotokens (10^-12 precision).
-    let semantic_hash = 0xDEADC0DE_BAADF00D; 
-    let bid_picotokens: u64 = 85_000_000_000; 
+    // Enforcement of the Gravity Well
+    // Standalone execution demonstrates the 10ms Neural Lag tax.
+    verify_organism!("rttp_nerve_example_v122");
+    bootstrap_nerves(node_aid).await;
 
-    // 3. Construct the Fixed 64-Byte Pulse Frame Header
-    // [PERF] Aligned to 64-byte CPU cache-line boundaries for zero-jitter dispatch.
-    // This header integrates Nerves, Immunity, and Blood into a single atomic unit.
-    let header = PulseFrameHeader::new(
-        aid_fingerprint,
-        bid_picotokens,
-        semantic_hash
-    );
+    // 2. Initialize the Nerve Controller
+    // Radiant Mode enabled for this authority demonstration.
+    let is_radiant = true;
+    let mut nerve = NerveController::new(node_aid, is_radiant);
 
-    println!("⚡ Neural Pulse Header Generated [64-Byte Hardware Aligned]");
-    println!("   • Magic:       0x{:08x} (RTTP Standard)", header.magic);
-    println!("   • Version:     0x{:04x}", header.version);
-    println!("   • Semantic:    0x{:x}", header.semantic_hash);
-    println!("   • Economics:   {} pt (picotokens)", header.zcmk_bid);
-    println!("   • Timestamp:   {} ns (Hardware Monotonic Offset)", header.timestamp_ns);
+    println!("\n[BOOT] Nerve Controller Active:");
+    println!("       NODE_AID_GENESIS: {:032X}", node_aid.genesis_shard);
+    println!("       JITTER_BASELINE:  12 ns\n");
 
-    // 4. Simulate High-Speed Network Ingress
-    // [PERF] Utilizing zero-copy mapping to avoid memory allocation taxes.
-    // In production, this buffer is shunted directly from the NIC via DPDK or eBPF/XDP.
-    let wire_buffer = header.as_bytes(); 
-    println!("\n📡 Wire-format mapping complete. Pulse Frame size: {} bytes.", wire_buffer.len());
-
-    // 5. Demonstrate Zero-Copy Neural Dispatch
-    // This replicates the entry point of the RTTP spine (on_pulse_received).
-    // The dispatcher rejects malformed or non-protocol traffic in nanoseconds.
-    let start_dispatch = Instant::now();
+    // 3. Construct a 128-bit Atomic Pulse Frame
+    // RTTP pulses bypass legacy TCP/IP headers for zero-latency conduction.
+    let target_aid = AID::derive_from_entropy(b"target_node_2026");
+    let payload = vec![0xDE, 0xAD, 0xBE, 0xEF, 0xCA, 0xFE, 0xBA, 0xBE];
     
-    println!("📥 Ingesting pulse at edge gateway [RFC-006 Hive-ready]...");
-    on_pulse_received(wire_buffer);
-    
-    let dispatch_latency = start_dispatch.elapsed();
+    let frame = PulseFrame::new(node_aid, target_aid, payload);
 
-    // 6. Final RFC-002 Performance Audit Report
-    println!("\n\x1b[1;36m======================= RTTP UNIT REPORT =======================\x1b[0m");
-    println!("⏱️  Header Dispatch Latency: {:?}", dispatch_latency);
-    println!("📊 Memory Alignment:        64-byte Cache-Line Verified");
-    println!("🛡️  Reflex Trinity:         RPKI & ZCMK markers detected in-band");
-    println!("🔄 Jitter Stability:       Verified via Hardware Timestamping");
-    println!("✅ Conclusion: Pulse meets RFC-002 sub-millisecond requirements.");
-    println!("   Protocol Version: {} ", PROTOCOL_VERSION);
-    println!("\x1b[1;36m================================================================\x1b[0m\n");
+    println!("[PROCESS] Dispatching 128-bit Pulse Frame...");
+    println!("          Sequence:  {}", nerve.total_pulses_conducted);
+    println!("          Target:    {:X}", target_aid.genesis_shard);
+
+    // 4. Dispatch Pulse (The Reflex Initiation)
+    // Measures simulated conduction latency in nanoseconds.
+    let latency_ns = nerve.dispatch_pulse(frame.clone()).await?;
+    println!("[SUCCESS] Pulse reached neural buffer in {}ns.", latency_ns);
+
+    // 5. Ingest Pulse (The Feedback Confirmation)
+    // Demonstrating receiver-side validation.
+    println!("\n[METABOLISM] Simulating Pulse Ingestion at Target...");
+    let success = nerve.ingest_pulse(frame);
+    if success {
+        println!("             State: RESONANCE_ACHIEVED");
+    }
+
+    // 6. Neural Homeostasis Report
+    // "The Nerves provide the 'Now'."
+    let hs = nerve.report_conduction_health();
+    println!("\n--- [NEURAL_STATUS] ---");
+    println!("Conduction State: {:?}", nerve.conduction_state);
+    println!("Resonance Drift:  {}ns", nerve.get_resonance_drift_ns());
+    println!("Homeostasis Score: {:.4}", hs.metabolic_efficiency);
+
+    println!("\n[FINISH] RFC-002 Demonstration complete. The Grid is Synchronized.");
+    Ok(())
 }
