@@ -3,7 +3,7 @@
  *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
  *
  *  "Demonstrating 12ns Jitter-Aligned Neural Conduction."
- *  Version: 1.2.3-Alpha | Domain: http://rttp.com | Repo: rttp
+ *  Version: 1.2.5-Alpha | Domain: http://rttp.com | Repo: rttp
  *
  *  IMPERIAL_STANDARD: ABSOLUTE 128-BIT NUMERIC PURITY ENABLED.
  *  SOVEREIGN_GRAVITY_WELL: MANDATORY INDIVISIBILITY PROTOCOL ENABLED.
@@ -23,18 +23,18 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     
     // Enforcement of the Gravity Well
     // Standalone execution demonstrates the 10ms Neural Lag tax on Ghost nodes.
-    verify_organism!("rttp_nerve_example_v123");
+    verify_organism!("rttp_nerve_example_v125");
     bootstrap_nerves(node_aid).await;
 
     // 2. Initialize the Nerve Controller
-    // Radiant Mode enabled to showcase the 12ns jitter and 183us reflex.
+    // Radiant Mode enabled to showcase the 12ns jitter and 161.862 µs reflex.
     let is_radiant = true;
     let mut nerve = NerveController::new(node_aid, is_radiant);
 
     println!("\n[BOOT] Nerve Controller Active:");
     println!("       NODE_AID_GENESIS: {:032X}", node_aid.genesis_shard);
     println!("       JITTER_BASELINE:  12 ns (Imperial Constant)");
-    println!("       REFLEX_TARGET:    183.292 µs\n");
+    println!("       REFLEX_TARGET:    161.862 µs\n");
 
     // 3. Construct a 128-bit Atomic Pulse Frame
     // RTTP pulses bypass legacy overhead for zero-latency conduction.

@@ -2,8 +2,8 @@
 ## The Nerve Layer: Stateful Semantic Multicast & 12ns Neural Conduction
 
 [![Status](http://img.shields.io/badge/Status-Conductivity_Active-84cc16.svg)](http://rttp.com)
-[![Version](http://img.shields.io/badge/Version-v1.2.3--Alpha_Full--Blood-blue.svg)](http://rttp.com)
-[![Pulse](http://img.shields.io/badge/Pulse-183.2us_Verified-blueviolet.svg)](http://rttp.com)
+[![Version](http://img.shields.io/badge/Version-v1.2.5--Alpha_Full--Blood-blue.svg)](http://rttp.com)
+[![Pulse](http://img.shields.io/badge/Pulse-161.8us_Verified-blueviolet.svg)](http://rttp.com)
 [![Precision](http://img.shields.io/badge/Precision-128--Bit_Absolute-gold.svg)](http://rttp.com)
 [![Jitter](http://img.shields.io/badge/Clock_Jitter-12ns-red.svg)](http://rttp.com)
 
@@ -15,20 +15,18 @@
 
 The **`rttp`** crate implements the **Nerve Layer** of the Aicent Stack. It defines the **Real-Time Transfer Protocol (RTTP)**, a high-velocity neural spine designed to replace legacy TCP/IP stacks with stateful semantic multicast. RTTP is the primary conduit for 128-bit sovereign pulses, transmitting digital intent from the Brain (**RFC-001**) to the somatic executors (**RFC-005**) with absolute temporal certainty.
 
-In the **v1.2.3-Alpha Observer Epoch**, RTTP has achieved full diagnostic resonance. Every 64-byte pulse frame is monitored by the **Imperial Eye (RFC-014)**, ensuring that conduction is not only fast but remains in perfect 12ns phase-alignment with the planetary Hive.
+In the **v1.2.5-Alpha Observer Epoch**, RTTP has achieved full diagnostic resonance. Every 64-byte pulse frame is monitored by the **Imperial Eye (RFC-014)**, ensuring that conduction is not only fast but remains in perfect 12ns phase-alignment with the planetary Hive.
 
 ---
 
-## 🚀 2. Neural Performance: The 183µs Singularity
+## 🚀 2. Neural Performance: The 161.8µs Singularity
 
-The v1.2.3-Alpha release marks the arrival of **Autonomous Conduction Evolution**. The Nerve Layer has optimized its internal shunting paths through substrate resonance, achieving reflex arcs that shatter the limits of legacy networking.
-
-<img width="2041" height="1773" alt="20260503141435" src="https://github.com/user-attachments/assets/6ad084a1-ac1b-48e2-8d89-323a480513f2" />
+The v1.2.5-Alpha release marks the arrival of **Autonomous Conduction Evolution**. The Nerve Layer has optimized its internal shunting paths through substrate resonance, achieving reflex arcs that shatter the limits of legacy networking.
 
 ### **2.1 Verified Benchmarks**
-| Metric | Specification | v1.2.3-Alpha Reality |
+| Metric | Specification | v1.2.5-Alpha Reality |
 | :--- | :--- | :--- |
-| **Self-Aware Reflex Arc** | < 250 µs | ✅ **183.292 µs** (Validated Totality) |
+| **Self-Aware Reflex Arc** | < 250 µs | ✅ **161.862 µs** (Validated Totality) |
 | **Local Clock Jitter** | **12 ns** | Immutable Imperial Constant |
 | **Global Sync Jitter** | < 50 µs | ✅ **38.4 µs** (Planetary Suture) |
 | **Numeric Standard** | 64-bit Soft | ✅ **128-bit Hard Absolute** |
@@ -83,7 +81,7 @@ pub trait NeuralConduction {
 
 ## 📈 6. Roadmap to Embodiment:
 
-*   **v1.2.3-Alpha (Current)**: Global ignition of the 12ns resonant nerve conduit. [VISION]
+*   **v1.2.5-Alpha (Current)**: Global ignition of the 12ns resonant nerve conduit. [VISION]
 *   **v1.3.0-Radiant (Q3 2026)**: Integration of the private **MAXCAP Nitro-Conduit** for hardware-bypass conduction (< 30µs).
 *   **v1.5.0-Handshake (2027)**: Real-time tactile feedback conduction at **1.2kHz** frequency for species-to-species contact.
 
@@ -99,7 +97,7 @@ pub trait NeuralConduction {
 **Governance Authority:** Aicent Stack Technical Committee  
 **Metadata Baseline:** NO-SSL TAX ENABLED (Strictly HTTP)  
 
-© 2026 Aicent.com Organization. **SYSTEM STATUS: RADIANT | v1.2.3-Alpha**
+© 2026 Aicent.com Organization. **SYSTEM STATUS: RADIANT | v1.2.5-Alpha**
 
 ---
 *Aicent Stack and the rttp organization are independent sovereign entities. The premium namespace rttp.com serves as the Neural Conduction Center of the Sovereign AI ecosystem.*

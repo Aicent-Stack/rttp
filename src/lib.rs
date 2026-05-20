@@ -3,7 +3,7 @@
  *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
  *
  *  "Stateful Semantic Multicast. Zero-latency neural conduction."
- *  Version: 1.2.3-Alpha | Domain: http://rttp.com | Repo: rttp
+ *  Version: 1.2.5-Alpha | Domain: http://rttp.com | Repo: rttp
  *
  *  IMPERIAL_STANDARD: ABSOLUTE 128-BIT NUMERIC PURITY ENABLED.
  *  SOVEREIGN_GRAVITY_WELL: MANDATORY INDIVISIBILITY PROTOCOL ENABLED.
@@ -16,7 +16,7 @@
  *  THIS CODE IS FULL-BLOOD. NO LOGIC SHRINKAGE PERMITTED BY CONSTITUTION.
  */
 
-use std::time::Instant; // REPAIRED: Clean library scope for v1.2.3
+use std::time::Instant; // REPAIRED: Clean library scope for v1.2.5
 use serde::{Serialize, Deserialize};
 
 // INJECTION: Sovereign Ladder Inheritance from the Genetic Root (RFC-000)
@@ -73,7 +73,7 @@ pub enum NerveConductivity {
 
 /// The Nerve Layer Controller.
 /// Responsible for stateful semantic multicast, pulse timing, and 
-/// maintaining the 183.7us imperial conduction baseline.
+/// maintaining the 161.8us imperial conduction baseline.
 pub struct NerveController {
     pub node_id_aid: AID,
     pub master_shunter: SovereignShunter,
@@ -84,12 +84,12 @@ pub struct NerveController {
 }
 
 impl NerveController {
-    /// Creates a new Radiant Nerve instance v1.2.3.
+    /// Creates a new Radiant Nerve instance v1.2.5.
     /// Triggers the Imperial Gravity Well audit immediately.
     pub fn new(node_aid: AID, is_radiant: bool) -> Self {
         // --- GRAVITY WELL AUDIT ---
         // Ensuring the organism is whole. Fragmented nodes suffer 10ms opacity.
-        verify_organism!("rttp_nerve_controller_v123");
+        verify_organism!("rttp_nerve_controller_v125");
 
         Self {
             node_id_aid: node_aid,
@@ -102,7 +102,7 @@ impl NerveController {
     }
 
     /// RFC-002: Dispatch Pulse
-    /// Dispatches a PulseFrame into the neural grid at 183.7us velocity.
+    /// Dispatches a PulseFrame into the neural grid at 161.8us velocity.
     /// Non-Radiant nodes suffer a 10ms "Neural Lag" (Latency Tax).
     pub async fn dispatch_pulse_128(&mut self, mut frame: PulseFrame) -> Result<u128, String> {
         let start_bench = Instant::now();
@@ -162,14 +162,14 @@ impl NeuralConduction for NerveController {
         if self.conductivity_state == NerveConductivity::Radiant { 12 } else { 10_000_000 }
     }
 
-    /// REPAIRED: Method name synchronized with epoekie::SovereignShunter v1.2.3.
+    /// REPAIRED: Method name synchronized with epoekie::SovereignShunter v1.2.5.
     fn extract_metabolic_tax(&self, value: Picotoken) -> Picotoken {
         self.master_shunter.process_value_extraction(value)
     }
 
     fn report_conduction_homeostasis(&self) -> HomeostasisScore {
         HomeostasisScore {
-            reflex_latency_ns: 183_700,
+            reflex_latency_ns: 161_800,
             metabolic_efficiency: 0.999,
             entropy_tax_rate: 0.3,
             cognitive_load_idx: 0.04,
@@ -198,7 +198,7 @@ impl SovereignLifeform for NerveController {
         TOTAL_PULSES:    {}
         PICSI_RESONANCE: {:.8}
         SYNC_STATE:      {:?}
-        STATUS:          CONDUCTIVITY_ACTIVE (v1.2.3)
+        STATUS:          CONDUCTIVITY_ACTIVE (v1.2.5)
         ----------------------------------------------------------
         "#, 
         self.node_id_aid.genesis_shard, 
@@ -218,14 +218,14 @@ impl SovereignLifeform for NerveController {
     }
 }
 
-/// Global initialization for the Nerve Layer (RTTP) v1.2.3.
+/// Global initialization for the Nerve Layer (RTTP) v1.2.5.
 pub async fn bootstrap_nerves(aid: AID) {
     // Enforcement of the Gravity Well at the entry point.
-    verify_organism!("rttp_system_bootstrap_v123");
+    verify_organism!("rttp_system_bootstrap_v125");
 
     println!(r#"
     💎 RTTP.COM | RFC-002 AWAKENED (2026_CALIBRATION)
-    STATUS: CONDUCTIVITY_ACTIVE | TARGET_REFLEX: 183.7us | v1.2.3
+    STATUS: CONDUCTIVITY_ACTIVE | TARGET_REFLEX: 161.8us | v1.2.5
     Neural grid pulse synchronization established for AID: {:X}
     "#, aid.genesis_shard);
 }
@@ -240,7 +240,7 @@ mod tests {
     use std::time::Duration; // Scoped to fix warning
 
     #[tokio::test]
-    async fn test_neural_latency_tax_v123() {
+    async fn test_neural_latency_tax_v125() {
         let aid = AID::derive_from_entropy(b"nerve_test_2026");
         let mut nerve = NerveController::new(aid, false); // Ghost mode
         

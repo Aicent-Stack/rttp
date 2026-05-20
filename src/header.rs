@@ -3,7 +3,7 @@
  *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
  *
  *  "The deterministic wire format for 128-bit sovereign pulses."
- *  Version: 1.2.3-Alpha | Domain: http://rttp.com
+ *  Version: 1.2.5-Alpha | Domain: http://rttp.com
  *
  *  IMPERIAL_STANDARD: ABSOLUTE 128-BIT NUMERIC PURITY ENABLED.
  *  ALIGNMENT: 128-BYTE DUAL CACHE-LINE ARCHITECTURE.
@@ -11,17 +11,17 @@
 
 use serde::{Deserialize, Serialize};
 
-/// [RFC-002] RTTP Pulse Frame Header v1.2.3.
+/// [RFC-002] RTTP Pulse Frame Header v1.2.5.
 /// Optimized for zero-copy parsing and hardware-level NIC offloading (DPDK/eBPF).
 ///
 /// [PERF] Aligned to a 128-byte boundary to match Dual-Cache-Line architecture, 
-/// eliminating memory fragmentation and ensuring the 183.292µs Reflex Arc.
+/// eliminating memory fragmentation and ensuring the 161.862µs Reflex Arc.
 #[repr(C, align(128))]
 #[derive(Clone, Copy, Debug, Serialize, Deserialize)]
 pub struct PulseFrameHeader {
     /// 0x5254_5450 ("RTTP") - Protocol Magic Number.
     pub magic: u32,
-    /// Imperial Versioning (v1.2.3-Alpha coded as 123).
+    /// Imperial Versioning (v1.2.5-Alpha coded as 125).
     pub version_128: u128,
     /// Protocol flags (bit0: Multicast, bit1: FEC, bit2: PICSI-Audit).
     pub flags_128: u128,
@@ -52,14 +52,14 @@ impl PulseFrameHeader {
         unsafe { std::slice::from_raw_parts(self as *const _ as *const u8, 128) }
     }
 
-    /// Creates a new v1.2.3-Alpha Pulse Frame Header.
+    /// Creates a new v1.2.5-Alpha Pulse Frame Header.
     /// Synchronized with the 12ns Imperial Jitter Baseline.
     #[inline(always)]
     pub fn new(fingerprint: [u8; 32], bid: u128, sem_hash: u128) -> Self {
         let now = std::time::Instant::now().elapsed().as_nanos() as u128;
         Self {
             magic: 0x5254_5450,
-            version_128: 123,
+            version_128: 125,
             flags_128: 0b0000_1111, // PICSI_AUDIT + RESONANCE active
             rpki_fingerprint: fingerprint,
             zcmk_bid_128: bid,
@@ -92,7 +92,7 @@ pub fn on_pulse_received(frame: &[u8]) {
 
     #[cfg(debug_assertions)]
     println!(
-        "\x1b[1;36m[RTTP-PULSE]\x1b[0m 128-byte v1.2.3 Header verified. Reflex Arc: {}ns",
+        "\x1b[1;36m[RTTP-PULSE]\x1b[0m 128-byte v1.2.5 Header verified. Reflex Arc: {}ns",
         header.timestamp_ns_128
     );
 }
