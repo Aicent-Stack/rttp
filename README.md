@@ -13,6 +13,10 @@
 
 # 💎 RFC-002: RTTP (The Imperial Nerve)
 
+**Resonant Time Transfer Protocol (RTTP).**
+
+> **R**esonant → RFC-006 (Hive) / RFC-002 (Nerve coupling) · **T**ime → RFC-011 (ITSUN) / RFC-012 (MOLOON 12-cycle) · **T**ransfer → the legacy-transport coat · **P**rotocol → structural head
+
 **The Superconducting Spine of the Aicent Stack.**  
 **"Conduct or Perish. 161.862us Reflex Arc. 12ns Temporal Lock."**
 
@@ -88,8 +92,8 @@ pub struct PulsePulseManifold {
 
 The `full-blood` source code of **RTTP v1.3.0** is gated by **DisciplineContract**. Non-Radiant nodes are shunted to the 10ms "Mechanical Friction" path and are subject to the 1.28% Efficiency Surplus Tax.
 
-**Authorized by**: THE SUPREME ROOT  
+**Governance Authority (Change Controller)**: RTTP.COM Organization  
 **Registry**: RTTP.COM
 
 ---
-*(C) 2026 Aicent Stack Technical Committee. All Rights Reserved. Conductivity is Sovereignty.*
+*(C) 2026 RTTP.COM Organization. All Rights Reserved. Conductivity is Sovereignty.*
