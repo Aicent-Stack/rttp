@@ -26,7 +26,7 @@
 >
 > The two schemes are *two halves of one addressing model*: they resolve at the same layer
 > and are intended to be encodable at the same cost. The sibling repository is
-> [`Aicent-Stack/iqa-org`](https://github.com/Aicent-Stack/rttp).
+> [`Aicent-Stack/rttp`](https://github.com/Aicent-Stack/rttp).
 >
 > **Registration status (both schemes):** submitted to IANA under RFC 7595 — **Provisional,
 > under review, not registered** (`rttp` ticket `#1459939`, `iqa` ticket `#1459963`). A
