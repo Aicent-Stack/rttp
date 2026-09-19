@@ -1,0 +1,6 @@
+build/
+.venv/
+__pycache__/
+seal_keys.json
+*.key
+*.pem
