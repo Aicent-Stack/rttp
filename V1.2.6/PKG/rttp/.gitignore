@@ -1,6 +1,20 @@
+# Build artifacts
 build/
+dist/
+*.egg-info/
+src/*.egg-info/
+
+# Virtual environments (recreate with: python -m venv .venv)
 .venv/
+.venv-*/
+
+# Python
 __pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Never commit key material. The managed profile expects `seal_keys.json` at
+# runtime; it must be provisioned per host, not carried in the source tree.
 seal_keys.json
 *.key
 *.pem
