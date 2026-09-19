@@ -1,0 +1,210 @@
+{
+  "spec": "RTTP-FRAME-EXT-v1.2.6",
+  "applies_to": [
+    "RFC-002 §4.1",
+    "RFC-002 §10"
+  ],
+  "generated_by": "SPEC/tools/conformance.py",
+  "note": "Generated file - do not edit by hand. Change the cases in conformance.py instead.",
+  "route_shard_rule": "ROUTE_SHARD = SHA-256(ASCII(canonical_authority))[0:16]",
+  "frame_size": 128,
+  "action_max_len": 16,
+  "positive_uris": [
+    {
+      "uri": "rttp://f3b2a1c4.rttp.aicent/vessel",
+      "canonical_uri": "rttp://f3b2a1c4.rttp.aicent/vessel",
+      "authority": "f3b2a1c4.rttp.aicent",
+      "intent": "f3b2a1c4",
+      "intent_is_hash": true,
+      "pillar": "rttp",
+      "root": "aicent",
+      "action": "vessel",
+      "action_omitted": false,
+      "route_shard_hex": "bf77b78ff6ceafc363226aa586562218",
+      "tolerance": false,
+      "note": null
+    },
+    {
+      "uri": "rttp://brain.epoekie.aicent/verify",
+      "canonical_uri": "rttp://brain.epoekie.aicent/verify",
+      "authority": "brain.epoekie.aicent",
+      "intent": "brain",
+      "intent_is_hash": false,
+      "pillar": "epoekie",
+      "root": "aicent",
+      "action": "verify",
+      "action_omitted": false,
+      "route_shard_hex": "459e543b73d86005b72ba77d5756e83c",
+      "tolerance": false,
+      "note": null
+    },
+    {
+      "uri": "rttp://f3b2a1c4.rttp.aicent",
+      "canonical_uri": "rttp://f3b2a1c4.rttp.aicent",
+      "authority": "f3b2a1c4.rttp.aicent",
+      "intent": "f3b2a1c4",
+      "intent_is_hash": true,
+      "pillar": "rttp",
+      "root": "aicent",
+      "action": "",
+      "action_omitted": true,
+      "route_shard_hex": "bf77b78ff6ceafc363226aa586562218",
+      "tolerance": false,
+      "note": null
+    },
+    {
+      "uri": "rttp://00000000.rpki.aicent/attest",
+      "canonical_uri": "rttp://00000000.rpki.aicent/attest",
+      "authority": "00000000.rpki.aicent",
+      "intent": "00000000",
+      "intent_is_hash": true,
+      "pillar": "rpki",
+      "root": "aicent",
+      "action": "attest",
+      "action_omitted": false,
+      "route_shard_hex": "753c105fd0f8bf341811acfaaac85b37",
+      "tolerance": false,
+      "note": null
+    },
+    {
+      "uri": "web+rttp://logic.zcmk.aicent/pulse",
+      "canonical_uri": "rttp://logic.zcmk.aicent/pulse",
+      "authority": "logic.zcmk.aicent",
+      "intent": "logic",
+      "intent_is_hash": false,
+      "pillar": "zcmk",
+      "root": "aicent",
+      "action": "pulse",
+      "action_omitted": false,
+      "route_shard_hex": "cdc32d19641c84aca3292de6276de056",
+      "tolerance": true,
+      "note": "tolerance - the specification defines no such form; accepted because it is the scheme name under which a handler is registered (RFC-002 §10.6)"
+    },
+    {
+      "uri": "rttp://a-b-c.d-e.f-g/audit-v2",
+      "canonical_uri": "rttp://a-b-c.d-e.f-g/audit-v2",
+      "authority": "a-b-c.d-e.f-g",
+      "intent": "a-b-c",
+      "intent_is_hash": false,
+      "pillar": "d-e",
+      "root": "f-g",
+      "action": "audit-v2",
+      "action_omitted": false,
+      "route_shard_hex": "905bf68b86aadf883cda2db9640912de",
+      "tolerance": false,
+      "note": null
+    }
+  ],
+  "negative_uris": [
+    {
+      "uri": "rttp://f3b2a1c4.rttp.aicent/VESSEL",
+      "reason": "uppercase action - lowercase only (RFC-002 §10.3)"
+    },
+    {
+      "uri": "rttp://F3B2A1C4.rttp.aicent/vessel",
+      "reason": "uppercase intent - lowercase only (RFC-002 §10.3)"
+    },
+    {
+      "uri": "RTTP://f3b2a1c4.rttp.aicent/vessel",
+      "reason": "uppercase scheme prefix - canonical form is lowercase (RFC-002 §10.3)"
+    },
+    {
+      "uri": "WEB+RTTP://f3b2a1c4.rttp.aicent/vessel",
+      "reason": "uppercase scheme prefix on the handler form (RFC-002 §10.3)"
+    },
+    {
+      "uri": "rttp://subject@rttp.aicent/vessel",
+      "reason": "userinfo is not defined (RFC-002 §10.3)"
+    },
+    {
+      "uri": "rttp://f3b2a1c4.rttp.aicent/vessel?x=1",
+      "reason": "query is not defined (RFC-002 §10.3)"
+    },
+    {
+      "uri": "rttp://f3b2a1c4.rttp.aicent/vessel#f",
+      "reason": "fragment is not defined (RFC-002 §10.3)"
+    },
+    {
+      "uri": "rttp://f3b2a1c4.rttp.aicent:443/vessel",
+      "reason": "port is not defined (RFC-002 §10.3)"
+    },
+    {
+      "uri": "rttp://f3b2a1c4.rttp.aicent/a/b",
+      "reason": "second path segment - path is a single '/<action>'"
+    },
+    {
+      "uri": "rttp://a.b",
+      "reason": "authority has two segments, must be <intent>.<pillar>.<root>"
+    },
+    {
+      "uri": "rttp://a.b.c.d/e",
+      "reason": "authority has four segments, must be <intent>.<pillar>.<root>"
+    },
+    {
+      "uri": "rttp://f3b2a1c4.rttp.aicent/",
+      "reason": "trailing '/' with empty action - action is 1*(...)"
+    },
+    {
+      "uri": "https://f3b2a1c4.rttp.aicent/vessel",
+      "reason": "not an rttp scheme - there is no fallback (RFC-002 §10.5)"
+    },
+    {
+      "uri": "rttp://f3b2a1c4.rttp.aicent/vessel ",
+      "reason": "trailing whitespace"
+    },
+    {
+      "uri": "rttp://-lead.rttp.aicent/vessel",
+      "reason": "intent begins with '-'"
+    }
+  ],
+  "frame_vectors": [
+    {
+      "uri": "rttp://f3b2a1c4.rttp.aicent/vessel",
+      "sequence_id": 1,
+      "ttl": 255,
+      "priority": 1,
+      "timestamp_ns": 1760000000000000000,
+      "aid_origin_hex": "5d42ba8b38fe10bfa702bdfe6af536ea16e20e35fbb48d84c3658d80cad2789d",
+      "action": "vessel",
+      "uri_anchored": true,
+      "spec_rev": 1,
+      "route_shard_hex": "bf77b78ff6ceafc363226aa586562218",
+      "header_hex": "5254545000000000000000000000000000000082000000000000000000000000000000010000000000000000186cc6acd4b00000ff01bf77b78ff6ceafc363226aa5865622185d42ba8b38fe10bfa702bdfe6af536ea16e20e35fbb48d84c3658d80cad2789d01010676657373656c0000000000000000000000000000000000"
+    },
+    {
+      "uri": "rttp://brain.epoekie.aicent/verify",
+      "sequence_id": 2,
+      "ttl": 255,
+      "priority": 1,
+      "timestamp_ns": 1760000000000000000,
+      "aid_origin_hex": "5d42ba8b38fe10bfa702bdfe6af536ea16e20e35fbb48d84c3658d80cad2789d",
+      "action": "verify",
+      "uri_anchored": true,
+      "spec_rev": 1,
+      "route_shard_hex": "459e543b73d86005b72ba77d5756e83c",
+      "header_hex": "5254545000000000000000000000000000000082000000000000000000000000000000020000000000000000186cc6acd4b00000ff01459e543b73d86005b72ba77d5756e83c5d42ba8b38fe10bfa702bdfe6af536ea16e20e35fbb48d84c3658d80cad2789d0101067665726966790000000000000000000000000000000000"
+    },
+    {
+      "uri": "rttp://f3b2a1c4.rttp.aicent",
+      "sequence_id": 3,
+      "ttl": 128,
+      "priority": 255,
+      "timestamp_ns": 1760000000000000000,
+      "aid_origin_hex": "5d42ba8b38fe10bfa702bdfe6af536ea16e20e35fbb48d84c3658d80cad2789d",
+      "action": "",
+      "uri_anchored": true,
+      "spec_rev": 1,
+      "route_shard_hex": "bf77b78ff6ceafc363226aa586562218",
+      "header_hex": "5254545000000000000000000000000000000082000000000000000000000000000000030000000000000000186cc6acd4b0000080ffbf77b78ff6ceafc363226aa5865622185d42ba8b38fe10bfa702bdfe6af536ea16e20e35fbb48d84c3658d80cad2789d0101000000000000000000000000000000000000000000000000"
+    }
+  ],
+  "compat_vector_spec_rev_0": {
+    "uri": "rttp://f3b2a1c4.rttp.aicent/vessel",
+    "spec_rev": 0,
+    "action": "",
+    "action_omitted": true,
+    "uri_anchored": false,
+    "expected": "verify() MUST accept; action is treated as omitted (RFC-002 §10.4 default operation)",
+    "header_hex": "5254545000000000000000000000000000000082000000000000000000000000000000010000000000000000186cc6acd4b00000ff01bf77b78ff6ceafc363226aa5865622185d42ba8b38fe10bfa702bdfe6af536ea16e20e35fbb48d84c3658d80cad2789d0000000000000000000000000000000000000000000000000000"
+  }
+}
