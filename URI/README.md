@@ -1,41 +1,143 @@
-# RTTP - Reference Implementation
+# rttp
 
-Independent reference implementation of the RTTP scheme, frozen against
-**spec v1.2.6**. The same conformance vectors ship in three independent
-languages, and all three must agree on every vector.
+**RTTP (Resonant Time Transfer Protocol) for Rust: `rttp://` intent addressing,
+`ROUTE_SHARD` derivation, the `PulseHeader128` codec, and the published
+conformance vectors that prove an implementation is right.**
 
-## Layout
+[RFC-002 sec. 4.1](https://rttp.com/RFC-002/) - [sec. 10](https://rttp.com/RFC-002/) - spec v1.2.6 - zero dependencies (default build) - `#![forbid(unsafe_code)]`
 
+---
+
+## Verify it -- no trust required
+
+```console
+$ cargo test -- --nocapture
+...
+[PASS] all 37 checks passed (1 skipped)
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
 ```
-URI/V1.2.6/   released 1.2.6 snapshot (python / javascript / rust)
-URI/V1.2.8/   current 1.2.8 sources   (python / javascript / rust)
+
+That is the point of this crate. A specification is worth exactly what an
+independent implementation can reproduce from it -- so instead of asking you to
+believe a table of numbers, this ships the vectors and replays them locally:
+**6 positive URIs + 15 fail-closed rejections + 3 frame vectors + 1 compat
+vector + 9 fail-closed frames + 1 accepted frame + 3 envelope checks** -- 38
+in total, the signature arithmetic being the only one a default build
+skips, and it says so out loud. All offline, no account, no network.
+
+The three implementations -- Python (`pip install rttp`), JavaScript
+(`npm install @aicent/rttp`), and this one -- **share no code** and agree byte
+for byte on the same published vector set
+(`sha256 4b743e63...`, shipped in all three packages).
+
+---
+
+## Install
+
+```console
+cargo add rttp
 ```
 
-## Versions
+Zero dependencies in the default build: SHA-256 is implemented in-crate
+(known-answer tested against NIST vectors) and the vector file is read through
+a minimal in-crate JSON reader. The sovereign seal envelope is available
+behind the optional `ed25519` feature -- the same split as the Python package's
+`[ed25519]` extra.
 
-| language | package | version |
-|----------|---------|---------|
-| python     | PyPI `rttp`          | 1.2.8 |
-| javascript | npm `@aicent/rttp`   | 1.2.8 |
-| rust       | crates.io `rttp`     | 1.2.8-alpha |
+---
 
-## Self-test counts (asserted in CI)
+## Quickstart
 
-| install | count |
-|---------|-------|
-| python default            | all 80 checks passed (3 skipped) |
-| python `rttp[ed25519]`    | all 83 checks passed |
-| node (`npx @aicent/rttp`) | all 35 checks passed |
-| rust default              | all 37 checks passed (1 skipped) |
-| rust `--features ed25519` | all 38 checks passed |
+```rust
+use rttp::rttp_uri;
 
-Default installs are zero-dependency; the optional `ed25519` extra adds the
-deterministic Ed25519 backend (RFC 8032) and un-skips the last checks.
+let parsed = rttp_uri::parse("rttp://brain.epoekie.aicent/verify").unwrap();
 
-## CI
+parsed.authority;              // 'brain.epoekie.aicent'
+parsed.action;                 // 'verify'
+parsed.route_shard_hex();      // '459e543b73d86005b72ba77d5756e83c' -- pure computation
+```
 
-`.github/workflows/ci.yml` runs three job families on every push: the Rust
-sources under `URI/V1.2.8/rust` are built and tested from this repository,
-while the Python and JavaScript jobs install the **published** packages by
-name - they test what a reviewer gets today, on a fresh machine, with no
-account. Every self-test count quoted above is asserted; drift fails the build.
+The same value the Python and JavaScript implementations derive, from code
+that shares nothing with either.
+
+Addressing is **DNS-free** (RFC-002 sec. 10.5): the routing shard derives from the
+authority by SHA-256, so no registry, resolver or network is involved.
+Malformed input is rejected rather than normalised -- a case variant is not a
+spelling difference, it is a different string. No fallback, no `rttps`.
+
+### Frame -- `PulseHeader128`
+
+```rust
+use rttp::build_for_uri;
+
+let raw = build_for_uri(1, 255, 1, "rttp://brain.epoekie.aicent/verify",
+                        &aid_origin, timestamp_ns)?;
+assert_eq!(raw.len(), 128);
+```
+
+Bytes `0x00`-`0x65` are untouched and `VERSION_ID` stays 130 -- the v1.2.6
+extension block (`0x66`-`0x7F`: SPEC_REV, FLAGS, ACTION) only fills bytes that
+were already zero, so readers of the old layout keep working.
+
+### Seal -- sovereign envelope (feature `ed25519`)
+
+```toml
+rttp = { version = "1.2.8-alpha", features = ["ed25519"] }
+```
+
+Ed25519, self-certifying (`AID = SHA-256(public key)`), canonical signing
+input prefixed `rttp-seal-v1\n`, `ts`/`nonce` inside the signature, 120-second
+freshness. The verifier needs only the envelope -- no key directory, no issuer.
+
+---
+
+## Scope -- what this crate is not
+
+| | |
+|:---|:---|
+| OK **Addressing / ROUTE_SHARD** | Real, and specified (RFC-002 sec. 10 / RFC-002 sec. 11). |
+| OK **Framing** | Real, and specified (RFC-002 sec. 4.1 + SPEC/RTTP-FRAME-EXT-v1.2.6). |
+| OK **Sealing** | Real, and specified (draft) -- feature `ed25519`. |
+| OK **Conformance vectors + independent replay** | Published and generated. |
+| NO **Transport** | **Not here.** No sockets, no `send()` -- the codec stays dependency-free and auditable. |
+| NO **Routing service** | `ROUTE_SHARD` is computed locally; delivering a frame to that hash is an operator's job. |
+| NO **Confidentiality** | Signing is not encryption. |
+
+Unknown revisions, algorithms and malformed input **fail closed** everywhere.
+Nothing in this crate is ever accepted because a check could not be performed.
+
+---
+
+## Naming
+
+| Ecosystem | Name | Status |
+|:---|:---|:---|
+| crates.io | `rttp` | **this crate** -- `1.2.8-alpha`, implemented against the v1.2.6 specification |
+| PyPI | `rttp` | **published** -- the Python reference implementation; `pip install rttp` |
+| npm | **`@aicent/rttp`** | **published** -- the JavaScript independent implementation |
+
+---
+
+## Specification status
+
+* **`rttp` URI scheme** -- submitted to IANA under RFC 7595, ticket **#1459939**,
+  Provisional, **under review**. It is **not yet registered**. Please describe
+  it that way.
+* **Internet-Draft (IETF)** -- the protocol is under IETF review as the
+  Individual Submission Internet-Draft `draft-li-rttp-intent-addressing`
+  (revision -01, posted 2026-09-20, informational):
+  https://datatracker.ietf.org/doc/draft-li-rttp-intent-addressing/ .
+  An Internet-Draft is a working document -- it is not an IETF standard and
+  carries no IETF endorsement.
+* **Frame layout** -- RFC-002 sec. 4.1, extended by `SPEC/RTTP-FRAME-EXT-v1.2.6.md`.
+* **Seal envelope** -- `SPEC/RTTP-SEAL-ENVELOPE-v1.2.6.md`, a **draft**.
+
+Where this crate and a specification disagree, **the specification wins and
+the crate is wrong.** Please report it.
+
+---
+
+## License
+
+Apache-2.0. See `LICENSE`.
