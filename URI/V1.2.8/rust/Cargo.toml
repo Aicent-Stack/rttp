@@ -1,0 +1,37 @@
+[package]
+name = "rttp"
+version = "1.2.8-alpha"
+edition = "2021"
+authors = ["RTTP.COM Organization"]
+description = "RTTP (Resonant Time Transfer Protocol) reference implementation in Rust: rttp:// intent addressing, ROUTE_SHARD derivation, the PulseHeader128 codec, and the published conformance vectors that prove an implementation is right."
+license = "Apache-2.0"
+homepage = "https://rttp.com"
+repository = "https://github.com/Aicent-Stack/rttp"
+readme = "README.md"
+keywords = ["rttp", "uri", "conformance", "addressing", "aicent"]
+categories = ["network-programming", "parser-implementations"]
+
+# ---------------------------------------------------------------------------
+# The core deliberately has NO dependencies. A protocol reference that cannot
+# be read without resolving a dependency tree is not much of a reference --
+# SHA-256 is implemented in-crate (known-answer tested) and the conformance
+# vectors are replayed through a minimal in-crate JSON reader.
+#
+# This manifest is standalone: it does NOT depend on epoekie, aicent or the
+# aicent-stack orchestrator, and the crate is `#![forbid(unsafe_code)]`.
+# ---------------------------------------------------------------------------
+
+[dependencies]
+ed25519-dalek = { version = "2", optional = true, features = ["rand_core"] }
+getrandom = { version = "0.2", optional = true }
+
+[features]
+default = []
+# Sovereign seal envelope (SPEC/RTTP-SEAL-ENVELOPE-v1.2.6 sec. 3) -- optional,
+# exactly like the `[ed25519]` extra of the Python package. The default build
+# stays zero-dependency; the envelope's signing input and AID self-certification
+# are replayed without it.
+ed25519 = ["dep:ed25519-dalek", "dep:getrandom"]
+
+[package.metadata.docs.rs]
+all-features = true

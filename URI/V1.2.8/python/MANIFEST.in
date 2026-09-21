@@ -1,0 +1,20 @@
+# The source distribution is the artifact that matches this project's claim:
+# a protocol reference an air-gapped reviewer can read end to end. So it carries
+# the documents, not just the code.
+include README.md
+include CHANGELOG.md
+include LICENSE
+include pyproject.toml
+
+# The published conformance vectors are package data (see pyproject.toml), so the
+# self-test works offline from an installed distribution.
+include src/rttp/vectors/*.json
+
+# Build and cache noise.
+global-exclude *.py[cod]
+global-exclude __pycache__/*
+prune src/rttp.egg-info
+prune .venv
+prune .venv-clean
+prune dist
+prune build
