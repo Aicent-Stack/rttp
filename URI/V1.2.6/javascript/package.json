@@ -1,0 +1,55 @@
+{
+  "name": "@aicent/rttp",
+  "version": "1.2.6",
+  "description": "RTTP for JavaScript: rttp:// intent validation, canonicalisation and ROUTE_SHARD derivation (RFC-002 §10), plus the published conformance vectors and an independent replay of them, including the 128-byte frame. Zero dependencies, no build step.",
+  "keywords": [
+    "rttp",
+    "uri",
+    "uri-scheme",
+    "intent-addressing",
+    "route-shard",
+    "frame",
+    "rfc-002",
+    "conformance",
+    "vectors",
+    "protocol"
+  ],
+  "license": "Apache-2.0",
+  "author": "RTTP.COM Organization",
+  "homepage": "https://rttp.com/",
+  "type": "module",
+  "main": "./src/rttp-uri.mjs",
+  "exports": {
+    ".": {
+      "types": "./src/rttp-uri.d.mts",
+      "default": "./src/rttp-uri.mjs"
+    },
+    "./conformance": {
+      "types": "./src/conformance.d.mts",
+      "default": "./src/conformance.mjs"
+    },
+    "./vectors.json": "./src/vectors.json"
+  },
+  "bin": {
+    "rttp": "bin/rttp.mjs",
+    "rttp-conformance": "bin/rttp.mjs"
+  },
+  "files": [
+    "src",
+    "bin",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "test": "node --test",
+    "prepublishOnly": "node --test"
+  }
+}
