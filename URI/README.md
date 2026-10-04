@@ -4,26 +4,27 @@
 `ROUTE_SHARD` derivation, the `PulseHeader128` codec, and the published
 conformance vectors that prove an implementation is right.**
 
-[RFC-002 sec. 4.1](https://rttp.com/RFC-002/) - [sec. 10](https://rttp.com/RFC-002/) - spec v1.2.6 - zero dependencies (default build) - `#![forbid(unsafe_code)]`
+[AICENT-002 sec. 4.1](https://rttp.com/AICENT-002/) - [sec. 10](https://rttp.com/AICENT-002/) - spec v1.2.6 - zero dependencies (default build) - `#![forbid(unsafe_code)]`
 
 ---
 
 ## Verify it -- no trust required
 
 ```console
-$ cargo test -- --nocapture
+$ cargo test
 ...
-[PASS] all 37 checks passed (1 skipped)
-test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+test result: ok. 13 passed; 0 failed; 0 ignored    # unit tests
+test result: ok. 1 passed; 0 failed; 0 ignored     # doc tests
 ```
 
 That is the point of this crate. A specification is worth exactly what an
 independent implementation can reproduce from it -- so instead of asking you to
 believe a table of numbers, this ships the vectors and replays them locally:
-**6 positive URIs + 15 fail-closed rejections + 3 frame vectors + 1 compat
-vector + 9 fail-closed frames + 1 accepted frame + 3 envelope checks** -- 38
-in total, the signature arithmetic being the only one a default build
-skips, and it says so out loud. All offline, no account, no network.
+the conformance replay walks **6 positive URIs + 15 fail-closed rejections +
+3 frame vectors + 1 compat vector + 9 fail-closed frames + 1 accepted frame +
+1 envelope vector** -- the full published set, byte for byte, with the
+Ed25519 envelope sub-check active when the optional feature is on.
+All offline, no account, no network.
 
 The three implementations -- Python (`pip install rttp`), JavaScript
 (`npm install @aicent/rttp`), and this one -- **share no code** and agree byte
@@ -61,7 +62,7 @@ parsed.route_shard_hex();      // '459e543b73d86005b72ba77d5756e83c' -- pure com
 The same value the Python and JavaScript implementations derive, from code
 that shares nothing with either.
 
-Addressing is **DNS-free** (RFC-002 sec. 10.5): the routing shard derives from the
+Addressing is **DNS-free** (AICENT-002 sec. 10.5): the routing shard derives from the
 authority by SHA-256, so no registry, resolver or network is involved.
 Malformed input is rejected rather than normalised -- a case variant is not a
 spelling difference, it is a different string. No fallback, no `rttps`.
@@ -83,7 +84,7 @@ were already zero, so readers of the old layout keep working.
 ### Seal -- sovereign envelope (feature `ed25519`)
 
 ```toml
-rttp = { version = "1.2.8-alpha", features = ["ed25519"] }
+rttp = { version = "1.3.1", features = ["ed25519"] }
 ```
 
 Ed25519, self-certifying (`AID = SHA-256(public key)`), canonical signing
@@ -96,8 +97,8 @@ freshness. The verifier needs only the envelope -- no key directory, no issuer.
 
 | | |
 |:---|:---|
-| OK **Addressing / ROUTE_SHARD** | Real, and specified (RFC-002 sec. 10 / RFC-002 sec. 11). |
-| OK **Framing** | Real, and specified (RFC-002 sec. 4.1 + SPEC/RTTP-FRAME-EXT-v1.2.6). |
+| OK **Addressing / ROUTE_SHARD** | Real, and specified (AICENT-002 sec. 10 / AICENT-002 sec. 11). |
+| OK **Framing** | Real, and specified (AICENT-002 sec. 4.1 + SPEC/RTTP-FRAME-EXT-v1.2.6). |
 | OK **Sealing** | Real, and specified (draft) -- feature `ed25519`. |
 | OK **Conformance vectors + independent replay** | Published and generated. |
 | NO **Transport** | **Not here.** No sockets, no `send()` -- the codec stays dependency-free and auditable. |
@@ -113,7 +114,7 @@ Nothing in this crate is ever accepted because a check could not be performed.
 
 | Ecosystem | Name | Status |
 |:---|:---|:---|
-| crates.io | `rttp` | **this crate** -- `1.2.8-alpha`, implemented against the v1.2.6 specification |
+| crates.io | `rttp` | **this crate** -- `1.3.1`, the first formal (non-pre-release) publication; the earlier `1.2.8-alpha` remains published and is not yanked |
 | PyPI | `rttp` | **published** -- the Python reference implementation; `pip install rttp` |
 | npm | **`@aicent/rttp`** | **published** -- the JavaScript independent implementation |
 
@@ -121,17 +122,19 @@ Nothing in this crate is ever accepted because a check could not be performed.
 
 ## Specification status
 
-* **`rttp` URI scheme** -- submitted to IANA under RFC 7595, ticket **#1459939**,
-  Provisional, **under review**. It is **not yet registered**. Please describe
-  it that way.
-* **Internet-Draft (IETF)** -- the protocol is under IETF review as the
-  Individual Submission Internet-Draft `draft-li-rttp-intent-addressing`
-  (revision -01, posted 2026-09-20, informational):
-  https://datatracker.ietf.org/doc/draft-li-rttp-intent-addressing/ .
+* **`rttp` URI scheme** -- **registered**: IANA "URI Schemes" registry,
+  Provisional, **CRI 27** (2026-09-22), submitted under RFC 7595.
+* **Internet-Draft (IETF)** -- under IETF review as the combined Individual
+  Submission Internet-Draft `draft-li-rttp-iqa-addressing` (revision -00,
+  16 pp., 2026-09-24, informational -- both schemes, one document):
+  https://datatracker.ietf.org/doc/draft-li-rttp-iqa-addressing/ .
   An Internet-Draft is a working document -- it is not an IETF standard and
   carries no IETF endorsement.
-* **Frame layout** -- RFC-002 sec. 4.1, extended by `SPEC/RTTP-FRAME-EXT-v1.2.6.md`.
+* **Frame layout** -- AICENT-002 sec. 4.1, extended by `SPEC/RTTP-FRAME-EXT-v1.2.6.md`.
 * **Seal envelope** -- `SPEC/RTTP-SEAL-ENVELOPE-v1.2.6.md`, a **draft**.
+* **AE-128** -- the answer-side counterpart of the pulse frame lives in the
+  sibling crate `iqa-org` 1.3.1 (`iqa_org::envelope`); the two carriers do not
+  parse each other and MUST NOT be conflated.
 
 Where this crate and a specification disagree, **the specification wins and
 the crate is wrong.** Please report it.
