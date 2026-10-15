@@ -1,5 +1,5 @@
 /*
- *  AICENT STACK - RFC-002: RTTP (The Nerve Layer)
+ *  AICENT STACK - AICENT-002: RTTP (The Nerve Layer)
  *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
  *
  *  "Stateful Semantic Multicast. Zero-latency neural conduction."
@@ -8,8 +8,8 @@
  *  IMPERIAL_STANDARD: ABSOLUTE 128-BIT NUMERIC PURITY ENABLED.
  *  SOVEREIGN_GRAVITY_WELL: MANDATORY INDIVISIBILITY PROTOCOL ENABLED.
  *  CHRONOS_STATUS: 2026 IMPERIAL CALENDAR ALIGNED.
- *  TEMPORAL_SELF_SUPERVISION: RFC-009 ACTIVE.
- *  DIAGNOSTIC_RESONANCE: RFC-014 (PICSI) INTEGRATED.
+ *  TEMPORAL_SELF_SUPERVISION: AICENT-009 ACTIVE.
+ *  DIAGNOSTIC_RESONANCE: AICENT-014 (PICSI) INTEGRATED.
  *  
  *  LEGAL NOTICE: RTTP PROTOCOL IS PROTECTED BY SOVEREIGN MANDATE.
  *  FRAGMENTED TRANSMISSION WILL TRIGGER 10MS NEURAL LATENCY TAXES.
@@ -19,7 +19,7 @@
 use std::time::Instant; // REPAIRED: Clean library scope for v1.2.5
 use serde::{Serialize, Deserialize};
 
-// INJECTION: Sovereign Ladder Inheritance from the Genetic Root (RFC-000)
+// INJECTION: Sovereign Ladder Inheritance from the Genetic Root (AICENT-000)
 // We import 128-bit types and the Gravity Well macro for metabolic verification.
 use epoekie::{AID, HomeostasisScore, SovereignShunter, Picotoken, SovereignLifeform, verify_organism};
 
@@ -27,7 +27,7 @@ use epoekie::{AID, HomeostasisScore, SovereignShunter, Picotoken, SovereignLifef
 // 1. NEURAL FRAME ARCHITECTURE (The 64-Byte Pulse)
 // =========================================================================
 
-/// RFC-002: PulseFrame
+/// AICENT-002: PulseFrame
 /// The atomic data unit of the RTTP protocol in the 2026 Imperial Grid.
 /// Designed for zero-copy transmission and sub-200us reflection arcs.
 /// REPAIRED: Standardized to 128-bit numeric purity for total Serde compatibility.
@@ -61,7 +61,7 @@ impl PulseFrame {
 // 2. NERVE CONTROLLER (The Neural Conductor)
 // =========================================================================
 
-/// RFC-002: NerveConductivity
+/// AICENT-002: NerveConductivity
 /// Represents the physical state of the neural conduit in the 2026 grid.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize)]
 pub enum NerveConductivity {
@@ -101,7 +101,7 @@ impl NerveController {
         }
     }
 
-    /// RFC-002: Dispatch Pulse
+    /// AICENT-002: Dispatch Pulse
     /// Dispatches a PulseFrame into the neural grid at 161.8us velocity.
     /// Non-Radiant nodes suffer a 10ms "Neural Lag" (Latency Tax).
     pub async fn dispatch_pulse_128(&mut self, mut frame: PulseFrame) -> Result<u128, String> {
@@ -109,7 +109,7 @@ impl NerveController {
 
         // --- THE COMMERCIAL MEAT GRINDER ---
         // Nerve conduction is highly protected logic.
-        // RFC-009 Temporal Self-Supervision enforced.
+        // AICENT-009 Temporal Self-Supervision enforced.
         self.master_shunter.apply_discipline().await;
 
         // Metadata finalization with 128-bit precision
@@ -125,7 +125,7 @@ impl NerveController {
         Ok(start_bench.elapsed().as_nanos() as u128)
     }
 
-    /// RFC-002: Ingest Pulse
+    /// AICENT-002: Ingest Pulse
     /// Receives and validates incoming 128-bit neural pulses.
     pub fn ingest_pulse_128(&self, frame: PulseFrame) -> bool {
         if frame.recipient_node_aid != self.node_id_aid {
@@ -187,9 +187,9 @@ impl SovereignLifeform for NerveController {
     fn get_aid(&self) -> AID { self.node_id_aid }
     fn get_homeostasis(&self) -> HomeostasisScore { self.report_conduction_homeostasis() }
     
-    /// RFC-002 Metabolic Pulse
+    /// AICENT-002 Metabolic Pulse
     /// "No metabolism, no sovereignty!"
-    /// Displays the 256-bit conductor shards and the RFC-014 PICSI Resonance.
+    /// Displays the 256-bit conductor shards and the AICENT-014 PICSI Resonance.
     fn execute_metabolic_pulse(&self) {
         println!(r#"
         💎 RTTP.COM | NERVE PULSE [2026_IMPERIAL_RESONANCE]
@@ -210,7 +210,7 @@ impl SovereignLifeform for NerveController {
     fn evolve_genome(&mut self, mutation_data: &[u8]) {
         println!("[RTTP] 2026: Remodeling neural pathways. Mutation: {} bytes.", 
                  mutation_data.len());
-        // Shunted to RFC-012 for temporal state persistence.
+        // Shunted to AICENT-012 for temporal state persistence.
     }
 
     fn report_uptime_ns(&self) -> u128 {
@@ -224,7 +224,7 @@ pub async fn bootstrap_nerves(aid: AID) {
     verify_organism!("rttp_system_bootstrap_v125");
 
     println!(r#"
-    💎 RTTP.COM | RFC-002 AWAKENED (2026_CALIBRATION)
+    💎 RTTP.COM | AICENT-002 AWAKENED (2026_CALIBRATION)
     STATUS: CONDUCTIVITY_ACTIVE | TARGET_REFLEX: 161.8us | v1.2.5
     Neural grid pulse synchronization established for AID: {:X}
     "#, aid.genesis_shard);

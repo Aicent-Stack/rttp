@@ -5,7 +5,7 @@ demo.rs 原文: let node_aid = AID::derive_from_entropy(node_seed);
              NODE_AID_GENESIS: {:032X}  →  genesis_shard 为 u128（16 字节）
 
 本模块以 SHA-256 派生 256-bit 身份 DNA（双分片: Genesis^Resonance），
-与 RFC-002 §4.1 的 AID_ORIGIN (0x46, 256-bit) 字段直接对应。
+与 AICENT-002 §4.1 的 AID_ORIGIN (0x46, 256-bit) 字段直接对应。
 """
 
 import hashlib

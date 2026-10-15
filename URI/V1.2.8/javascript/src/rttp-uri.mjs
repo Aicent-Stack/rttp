@@ -1,8 +1,8 @@
 /**
- * @aicent/rttp - RFC-002 sec. 10 `rttp` URI validation, canonicalisation and
+ * @aicent/rttp - AICENT-002 sec. 10 `rttp` URI validation, canonicalisation and
  * ROUTE_SHARD derivation.
  *
- * This module is the reference implementation of the mapping RFC-002 sec. 10.4
+ * This module is the reference implementation of the mapping AICENT-002 sec. 10.4
  * promises:
  *     "Dereferencing an `rttp` URI emits one pulse ... carrying `action` as the
  *      intent verb."
@@ -13,7 +13,7 @@
  * and agree byte for byte is what makes the vectors worth anything.
  *
  * Authority (important):
- *   * URI **syntax** - the sole authority is the RFC-002 sec. 10.2 ABNF. This module
+ *   * URI **syntax** - the sole authority is the AICENT-002 sec. 10.2 ABNF. This module
  *     adds no syntax.
  *   * This module does exactly two things: (1) validate and **canonicalise**
  *     per sec. 10.2/sec. 10.3; (2) derive ROUTE_SHARD.
@@ -36,7 +36,7 @@
  *
  * Zero dependencies - `node:crypto` and nothing else.
  *
- * @see https://rttp.com/RFC-002/
+ * @see https://rttp.com/AICENT-002/
  */
 
 import { createHash } from 'node:crypto';
@@ -121,7 +121,7 @@ function checkToken(value, what) {
       // sec. 10.3: the canonical form is lowercase. Uppercase is not a normalisable
       // spelling difference - it is illegal input.
       throw new RttpUriError(
-        `${what} contains uppercase '${ch}' - lowercase US-ASCII only (RFC-002 sec. 10.3)`);
+        `${what} contains uppercase '${ch}' - lowercase US-ASCII only (AICENT-002 sec. 10.3)`);
     }
     throw new RttpUriError(
       `${what} contains illegal character ${JSON.stringify(ch)} (allowed: a-z, 0-9, '-')`);
@@ -181,7 +181,7 @@ export function deriveRouteShard(canonicalAuthority) {
     throw new RttpUriError('canonical_authority is empty');
   }
   if (canonicalAuthority !== canonicalAuthority.toLowerCase()) {
-    throw new RttpUriError('canonical_authority must be lowercase (RFC-002 sec. 10.3)');
+    throw new RttpUriError('canonical_authority must be lowercase (AICENT-002 sec. 10.3)');
   }
   const digest = createHash('sha256')
     .update(Buffer.from(canonicalAuthority, 'ascii'))

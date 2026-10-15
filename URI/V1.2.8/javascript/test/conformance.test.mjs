@@ -48,7 +48,7 @@ test('the shipped vector set passes, and covers 35 checks', () => {
 test('the shipped vectors are the ones the specification states', () => {
   const v = loadVectors();
   assert.equal(v.spec, 'RTTP-FRAME-EXT-v1.2.6');
-  assert.deepEqual(v.applies_to, ['RFC-002 sec. 4.1', 'RFC-002 sec. 10']);
+  assert.deepEqual(v.applies_to, ['AICENT-002 sec. 4.1', 'AICENT-002 sec. 10']);
   assert.equal(v.frame_size, 128);
   assert.match(v.route_shard_rule, /SHA-256/);
   assert.equal(v.positive_uris.length, 6);

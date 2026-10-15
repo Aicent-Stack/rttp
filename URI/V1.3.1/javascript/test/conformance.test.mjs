@@ -49,8 +49,8 @@ test('the shipped vectors are the ones the specification states', () => {
   const v = loadVectors();
   assert.equal(v.spec, 'RTTP-FRAME-EXT-v1.2.6');
   // The frozen vector file predates the AICENT-002 designation: its labels
-  // read RFC-002, and the labels must mirror the shipped bytes, not the docs.
-  assert.deepEqual(v.applies_to, ['RFC-002 sec. 4.1', 'RFC-002 sec. 10']);
+  // read AICENT-002, and the labels must mirror the shipped bytes, not the docs.
+  assert.deepEqual(v.applies_to, ['AICENT-002 sec. 4.1', 'AICENT-002 sec. 10']);
   assert.equal(v.frame_size, 128);
   assert.match(v.route_shard_rule, /SHA-256/);
   assert.equal(v.positive_uris.length, 6);

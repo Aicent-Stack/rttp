@@ -13,7 +13,7 @@
  * imports nothing from `src/rttp-uri.mjs` and must not: a conformance suite that
  * reuses the code it is checking only proves that the code equals itself.
  *
- * Authority boundary: URI syntax = RFC-002 sec. 10.2; frame layout = sec. 4.1 as
+ * Authority boundary: URI syntax = AICENT-002 sec. 10.2; frame layout = sec. 4.1 as
  * extended by `SPEC/RTTP-FRAME-EXT-v1.2.6.md`.
  *
  * Zero dependencies: `node:crypto` and `node:fs`, nothing else.
@@ -49,7 +49,7 @@ const OFF_RESERVED = 0x79;
 const KNOWN_SPEC_REVS = new Set([0, 1]);
 const FLAG_URI_ANCHORED = 0x01;
 
-/** The ACTION field is 16 bytes; ACTION_LEN is one byte. See RFC-002 sec. 10.2. */
+/** The ACTION field is 16 bytes; ACTION_LEN is one byte. See AICENT-002 sec. 10.2. */
 export const ACTION_MAX_LEN = 16;
 
 const TOKEN = /^[a-z0-9-]+$/;
@@ -60,7 +60,7 @@ const HASH_INTENT = /^[0-9a-f]{8}$/;
 // ---------------------------------------------------------------------------
 
 /**
- * Parse one `rttp` URI - an implementation written from RFC-002 sec. 10.2 alone,
+ * Parse one `rttp` URI - an implementation written from AICENT-002 sec. 10.2 alone,
  * sharing no code with `src/rttp-uri.mjs`.
  *
  * @param {string} uri
@@ -170,7 +170,7 @@ export function buildFrame({ sequenceId, ttl, priority, shardHex, aidHex, timest
  * Verify a `PulseHeader128`, mirroring the Python `pulse_header.verify`.
  *
  * Implements the extension-block rules of RTTP-FRAME-EXT-v1.2.6 sec. 2 / sec. 4
- * (R2-R7) and the ACTION grammar of RFC-002 sec. 10.2. Every failure throws: a
+ * (R2-R7) and the ACTION grammar of AICENT-002 sec. 10.2. Every failure throws: a
  * check that cannot be performed is a failure, never a pass.
  *
  * @param {Buffer} raw 128 bytes
@@ -219,7 +219,7 @@ export function verifyFrame(raw, options = {}) {
   if (specRev === 1 && actionLen > 0) {
     action = raw.subarray(OFF_ACTION, OFF_ACTION + actionLen).toString('ascii');
     if (!TOKEN.test(action)) {
-      throw new Error(`ACTION violates RFC-002 sec. 10.2: ${JSON.stringify(action)}`);
+      throw new Error(`ACTION violates AICENT-002 sec. 10.2: ${JSON.stringify(action)}`);
     }
   }
 

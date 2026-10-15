@@ -95,7 +95,7 @@ export declare const DEFAULT_VECTORS_PATH: string;
 /** The ACTION field is 16 bytes. */
 export declare const ACTION_MAX_LEN: 16;
 
-/** Independent implementation of RFC-002 sec. 10.2. Throws `Error`. */
+/** Independent implementation of AICENT-002 sec. 10.2. Throws `Error`. */
 export declare function parseUri(uri: string): ParsedUri;
 
 /** Independent implementation of the 128-byte frame. Throws `Error`. */

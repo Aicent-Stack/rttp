@@ -31,7 +31,7 @@
 //!
 //! ## Authority
 //!
-//! Grammar: RFC-002 sec. 10.2 ABNF. Frame: RFC-002 sec. 4.1 + SPEC/RTTP-FRAME-EXT-v1.2.6.
+//! Grammar: AICENT-002 sec. 10.2 ABNF. Frame: AICENT-002 sec. 4.1 + SPEC/RTTP-FRAME-EXT-v1.2.6.
 //! The `rttp` URI scheme is submitted to IANA under RFC 7595 (ticket
 //! #1459939, Provisional) and is **under review -- not yet registered**.
 //! Where this crate and a specification disagree, **the specification wins

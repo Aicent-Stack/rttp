@@ -69,7 +69,7 @@ air-gapped reviewer should be able to check the frames.
 | `rttp.rttp_uri` | Validate, canonicalise and derive `ROUTE_SHARD` from an `rttp` URI | AICENT-002 sec. 10.2 / sec. 10.3 ABNF |
 | `rttp.seal` | **Managed profile** -- symmetric HMAC-SHA256 over a pre-shared key table | -- |
 | `rttp.seal_asym` | **Sovereign profile** -- Ed25519, self-certifying, no issuance and no registry | `SPEC/RTTP-SEAL-ENVELOPE-v1.2.6.md` (draft) |
-| `rttp.aid` | Autonomous Identity derivation | RFC-001 |
+| `rttp.aid` | Autonomous Identity derivation | AICENT-001 |
 
 Plus `rttp.vectors` -- the published conformance vectors, shipped inside the wheel
 so the self-test works from an installed package with no repository checkout.

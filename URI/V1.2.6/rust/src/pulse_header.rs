@@ -1,4 +1,4 @@
-//! `PulseHeader128` — RFC-002 §4.1 official 128-byte hardware-aligned frame
+//! `PulseHeader128` — AICENT-002 §4.1 official 128-byte hardware-aligned frame
 //! header, plus the v1.2.6 extension block (`0x66`–`0x7F`).
 //!
 //! Field layout (big-endian, per §4.1):
@@ -89,7 +89,7 @@ pub fn encode_action(action: &str) -> Result<[u8; ACTION_MAX_LEN], PulseHeaderEr
     }
     if !rttp_uri::is_valid_action(action) {
         return Err(PulseHeaderError(format!(
-            "invalid action token {:?} (RFC-002 §10.2: 1*( a-z / 0-9 / '-' ))",
+            "invalid action token {:?} (AICENT-002 §10.2: 1*( a-z / 0-9 / '-' ))",
             action
         )));
     }
@@ -285,7 +285,7 @@ pub fn verify(
         }
         if !fields.action.is_empty() && !rttp_uri::is_valid_action(&fields.action) {
             return Err(PulseHeaderError(format!(
-                "ACTION violates RFC-002 §10.2: {:?}",
+                "ACTION violates AICENT-002 §10.2: {:?}",
                 fields.action
             )));
         }

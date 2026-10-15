@@ -32,7 +32,7 @@ rest of the stack — so an AID means one thing everywhere, not two.
 Wire form (the *envelope*)
 --------------------------
 The seal does **not** travel in the 128-byte header: `0x00`–`0x65` is frozen by
-RFC-002 §4.1 and the v1.2.6 extension block has no room for a 64-byte signature.
+AICENT-002 §4.1 and the v1.2.6 extension block has no room for a 64-byte signature.
 An envelope wraps a frame (or any payload) instead:
 
     {
@@ -58,7 +58,7 @@ Canonical signing input::
     })
 
 `json_canonical` = UTF-8, sorted keys, no insignificant whitespace. Hex is
-**lowercase only**, consistent with the canonical-form discipline of RFC-002
+**lowercase only**, consistent with the canonical-form discipline of AICENT-002
 §10.3 — a case variant is not normalised, it is rejected.
 
 Verification order (fail closed, never "best effort")
@@ -75,7 +75,7 @@ because a check could not be performed.
 Draft status
 ------------
 ⚠ This envelope format is introduced in v1.2.6 and is **not yet part of
-RFC-002**. It is specified in `SPEC/RTTP-SEAL-ENVELOPE-v1.2.6.md`; until that
+AICENT-002**. It is specified in `SPEC/RTTP-SEAL-ENVELOPE-v1.2.6.md`; until that
 document is folded into the RFC, treat it as a draft addition and say so when
 you cite it.
 
@@ -209,7 +209,7 @@ def _hex_lower(value, what: str, nbytes: int) -> str:
     if not isinstance(value, str):
         raise SealError(f"{what} must be a hex string")
     if value != value.lower():
-        raise SealError(f"{what} must be lowercase hex (RFC-002 §10.3)")
+        raise SealError(f"{what} must be lowercase hex (AICENT-002 §10.3)")
     if len(value) != nbytes * 2:
         raise SealError(f"{what} must be {nbytes} bytes ({nbytes * 2} hex chars)")
     try:

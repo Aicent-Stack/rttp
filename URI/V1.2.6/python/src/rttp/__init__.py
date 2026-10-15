@@ -1,5 +1,5 @@
 """
-rttp — RTTP reference implementation (RFC-002 §4.1 framing · §10 addressing · §11 mapping)
+rttp — RTTP reference implementation (AICENT-002 §4.1 framing · §10 addressing · §11 mapping)
 
 **Zero dependencies.** Everything in the core package runs on the Python standard
 library alone. The optional Ed25519 seal backend is the single exception and is
@@ -30,8 +30,8 @@ Modules
 
 Authority boundary
 ------------------
-* URI **syntax** — RFC-002 §10.2 ABNF. This package adds no syntax.
-* Frame **layout** — RFC-002 §4.1, extended by SPEC/RTTP-FRAME-EXT-v1.2.6.md.
+* URI **syntax** — AICENT-002 §10.2 ABNF. This package adds no syntax.
+* Frame **layout** — AICENT-002 §4.1, extended by SPEC/RTTP-FRAME-EXT-v1.2.6.md.
 * Each module docstring names its own authority; where the spec is silent, the
   module says so rather than inventing a rule.
 """

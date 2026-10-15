@@ -3,7 +3,7 @@
 **RTTP for JavaScript: `rttp://` intent addressing, `ROUTE_SHARD` derivation --
 and the published conformance vectors that prove an implementation is right.**
 
-[RFC-002 sec. 10](https://rttp.com/RFC-002/) - spec v1.2.6 - zero dependencies - no build step
+[AICENT-002 sec. 10](https://rttp.com/AICENT-002/) - spec v1.2.6 - zero dependencies - no build step
 
 ---
 
@@ -80,7 +80,7 @@ conformance vectors pin for that address, so the example can be **checked**
 rather than believed. It is also the value the Python implementation derives,
 from code that shares nothing with this one.
 
-Addressing is **DNS-free** (RFC-002 sec. 10.5): the routing hash is derived from the
+Addressing is **DNS-free** (AICENT-002 sec. 10.5): the routing hash is derived from the
 authority by SHA-256, so no registry, resolver or network is involved. A URI
 either yields a shard or throws -- there is no fallback, and no `rttps`.
 
@@ -90,7 +90,7 @@ either yields a shard or throws -- there is no fallback, and no `rttps`.
 
 **Malformed input is rejected, not normalised.** `rttp://.../VESSEL` and
 `rttp://F3B2A1C4..../vessel` both throw, because the canonical form is lowercase
-US-ASCII (RFC-002 sec. 10.3) and a case variant is not a spelling difference -- it is
+US-ASCII (AICENT-002 sec. 10.3) and a case variant is not a spelling difference -- it is
 a *different string*. Admitting both would give one address two spellings, which
 is the ambiguity sec. 10.3 exists to remove.
 
@@ -144,7 +144,7 @@ field for field, byte for byte.
 | `intent` | 8 lowercase hex digits (32-bit routing hash) or a readable organ token |
 | `intent_is_hash` / `intent_hash32` | Whether it is a hash-intent, and its value |
 | `pillar`, `root` | The other two authority labels |
-| `action` | Empty string when omitted (RFC-002 sec. 10.4 default operation) |
+| `action` | Empty string when omitted (AICENT-002 sec. 10.4 default operation) |
 | `action_omitted` | The same fact as a boolean |
 | `authority` | `<intent>.<pillar>.<root>`, canonical |
 | `canonical_uri` | Always begins `rttp://` |
@@ -179,7 +179,7 @@ In CI:
 | `runConformance(vectors)` | Replay a vector set -> `{ checked, failures, passed }` |
 | `loadVectors(path?)` | Parse a vector set; defaults to the shipped one |
 | `DEFAULT_VECTORS_PATH` | Absolute path of the shipped `vectors.json` |
-| `parseUri(uri)` | The independent RFC-002 sec. 10.2 implementation -> `{ authority, action, shardHex }` |
+| `parseUri(uri)` | The independent AICENT-002 sec. 10.2 implementation -> `{ authority, action, shardHex }` |
 | `buildFrame(fields)` | The independent 128-byte frame builder -> `Buffer` |
 | `ACTION_MAX_LEN` | `16` -- the ACTION field's capacity |
 
@@ -203,7 +203,7 @@ Two implementations either agree byte for byte or they do not.
 
 ### Why the checker lives in this package, and why that is still honest
 
-`src/conformance.mjs` is written from RFC-002 sec. 10 alone and **must never import
+`src/conformance.mjs` is written from AICENT-002 sec. 10 alone and **must never import
 `src/rttp-uri.mjs`**. A conformance suite that reuses the code under test only
 proves the code equals itself. The two files share no code, so the rule is
 checkable by reading them.
@@ -229,7 +229,7 @@ agreeing with its own bugs.
 
 | | |
 |:---|:---|
-| OK **Validation** | Real, and specified (RFC-002 sec. 10.2 / sec. 10.3). |
+| OK **Validation** | Real, and specified (AICENT-002 sec. 10.2 / sec. 10.3). |
 | OK **Canonicalisation** | Real, and specified. |
 | OK **ROUTE_SHARD derivation** | Real, and specified. |
 | OK **Conformance vectors + independent replay** | Published and generated. |
@@ -263,7 +263,7 @@ agreeing with its own bugs.
   https://datatracker.ietf.org/doc/draft-li-rttp-intent-addressing/ .
   An Internet-Draft is a working document -- it is not an IETF standard and
   carries no IETF endorsement.
-* **Frame layout** -- RFC-002 sec. 4.1, extended by `SPEC/RTTP-FRAME-EXT-v1.2.6.md`.
+* **Frame layout** -- AICENT-002 sec. 4.1, extended by `SPEC/RTTP-FRAME-EXT-v1.2.6.md`.
 
 Where this package and the specification disagree, **the specification wins and
 this package is wrong.** Please report it.

@@ -1,7 +1,7 @@
 """
-PulseHeader128 -- the 128-byte hardware-aligned frame header of RFC-002 sec. 4.1.
+PulseHeader128 -- the 128-byte hardware-aligned frame header of AICENT-002 sec. 4.1.
 
-Field layout (big endian, one to one with the table in RFC-002 sec. 4.1):
+Field layout (big endian, one to one with the table in AICENT-002 sec. 4.1):
     0x00  u32   RTTP_MAGIC    0x52545450
     0x04  u128  VERSION_ID    pinned at 130
     0x14  u128  SEQUENCE_ID   monotonic pulse number
@@ -63,7 +63,7 @@ def encode_action(action: str) -> bytes:
         return bytes(ACTION_MAX_LEN)
     if not rttp_uri.is_valid_action(action):
         raise PulseHeaderError(
-            f"invalid action token {action!r} (RFC-002 sec. 10.2: 1*( a-z / 0-9 / '-' ))")
+            f"invalid action token {action!r} (AICENT-002 sec. 10.2: 1*( a-z / 0-9 / '-' ))")
     raw = action.encode("ascii")
     if len(raw) > ACTION_MAX_LEN:
         raise PulseHeaderError(
@@ -221,7 +221,7 @@ def verify(raw: bytes, expected_aid_origin: bytes = None) -> dict:
         if any(action_block[len(action.encode("ascii")):]):
             raise PulseHeaderError("ACTION padding must be zero")
         if action and not rttp_uri.is_valid_action(action):
-            raise PulseHeaderError(f"ACTION violates RFC-002 sec. 10.2: {action!r}")
+            raise PulseHeaderError(f"ACTION violates AICENT-002 sec. 10.2: {action!r}")
 
     if expected_aid_origin is not None and \
             fields["aid_origin"] != expected_aid_origin:

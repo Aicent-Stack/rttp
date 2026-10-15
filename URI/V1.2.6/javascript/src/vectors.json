@@ -1,8 +1,8 @@
 {
   "spec": "RTTP-FRAME-EXT-v1.2.6",
   "applies_to": [
-    "RFC-002 §4.1",
-    "RFC-002 §10"
+    "AICENT-002 §4.1",
+    "AICENT-002 §10"
   ],
   "generated_by": "SPEC/tools/conformance.py",
   "note": "Generated file - do not edit by hand. Change the cases in conformance.py instead.",
@@ -78,7 +78,7 @@
       "action_omitted": false,
       "route_shard_hex": "cdc32d19641c84aca3292de6276de056",
       "tolerance": true,
-      "note": "tolerance - the specification defines no such form; accepted because it is the scheme name under which a handler is registered (RFC-002 §10.6)"
+      "note": "tolerance - the specification defines no such form; accepted because it is the scheme name under which a handler is registered (AICENT-002 §10.6)"
     },
     {
       "uri": "rttp://a-b-c.d-e.f-g/audit-v2",
@@ -98,35 +98,35 @@
   "negative_uris": [
     {
       "uri": "rttp://f3b2a1c4.rttp.aicent/VESSEL",
-      "reason": "uppercase action - lowercase only (RFC-002 §10.3)"
+      "reason": "uppercase action - lowercase only (AICENT-002 §10.3)"
     },
     {
       "uri": "rttp://F3B2A1C4.rttp.aicent/vessel",
-      "reason": "uppercase intent - lowercase only (RFC-002 §10.3)"
+      "reason": "uppercase intent - lowercase only (AICENT-002 §10.3)"
     },
     {
       "uri": "RTTP://f3b2a1c4.rttp.aicent/vessel",
-      "reason": "uppercase scheme prefix - canonical form is lowercase (RFC-002 §10.3)"
+      "reason": "uppercase scheme prefix - canonical form is lowercase (AICENT-002 §10.3)"
     },
     {
       "uri": "WEB+RTTP://f3b2a1c4.rttp.aicent/vessel",
-      "reason": "uppercase scheme prefix on the handler form (RFC-002 §10.3)"
+      "reason": "uppercase scheme prefix on the handler form (AICENT-002 §10.3)"
     },
     {
       "uri": "rttp://subject@rttp.aicent/vessel",
-      "reason": "userinfo is not defined (RFC-002 §10.3)"
+      "reason": "userinfo is not defined (AICENT-002 §10.3)"
     },
     {
       "uri": "rttp://f3b2a1c4.rttp.aicent/vessel?x=1",
-      "reason": "query is not defined (RFC-002 §10.3)"
+      "reason": "query is not defined (AICENT-002 §10.3)"
     },
     {
       "uri": "rttp://f3b2a1c4.rttp.aicent/vessel#f",
-      "reason": "fragment is not defined (RFC-002 §10.3)"
+      "reason": "fragment is not defined (AICENT-002 §10.3)"
     },
     {
       "uri": "rttp://f3b2a1c4.rttp.aicent:443/vessel",
-      "reason": "port is not defined (RFC-002 §10.3)"
+      "reason": "port is not defined (AICENT-002 §10.3)"
     },
     {
       "uri": "rttp://f3b2a1c4.rttp.aicent/a/b",
@@ -146,7 +146,7 @@
     },
     {
       "uri": "https://f3b2a1c4.rttp.aicent/vessel",
-      "reason": "not an rttp scheme - there is no fallback (RFC-002 §10.5)"
+      "reason": "not an rttp scheme - there is no fallback (AICENT-002 §10.5)"
     },
     {
       "uri": "rttp://f3b2a1c4.rttp.aicent/vessel ",
@@ -204,7 +204,7 @@
     "action": "",
     "action_omitted": true,
     "uri_anchored": false,
-    "expected": "verify() MUST accept; action is treated as omitted (RFC-002 §10.4 default operation)",
+    "expected": "verify() MUST accept; action is treated as omitted (AICENT-002 §10.4 default operation)",
     "header_hex": "5254545000000000000000000000000000000082000000000000000000000000000000010000000000000000186cc6acd4b00000ff01bf77b78ff6ceafc363226aa5865622185d42ba8b38fe10bfa702bdfe6af536ea16e20e35fbb48d84c3658d80cad2789d0000000000000000000000000000000000000000000000000000"
   }
 }

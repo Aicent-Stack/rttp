@@ -1,7 +1,7 @@
 {
   "name": "@aicent/rttp",
   "version": "1.2.6",
-  "description": "RTTP for JavaScript: rttp:// intent validation, canonicalisation and ROUTE_SHARD derivation (RFC-002 §10), plus the published conformance vectors and an independent replay of them, including the 128-byte frame. Zero dependencies, no build step.",
+  "description": "RTTP for JavaScript: rttp:// intent validation, canonicalisation and ROUTE_SHARD derivation (AICENT-002 §10), plus the published conformance vectors and an independent replay of them, including the 128-byte frame. Zero dependencies, no build step.",
   "keywords": [
     "rttp",
     "uri",

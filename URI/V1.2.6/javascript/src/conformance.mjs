@@ -13,7 +13,7 @@
  * imports nothing from `src/rttp-uri.mjs` and must not: a conformance suite that
  * reuses the code it is checking only proves that the code equals itself.
  *
- * Authority boundary: URI syntax = RFC-002 §10.2; frame layout = §4.1 as
+ * Authority boundary: URI syntax = AICENT-002 §10.2; frame layout = §4.1 as
  * extended by `SPEC/RTTP-FRAME-EXT-v1.2.6.md`.
  *
  * Zero dependencies: `node:crypto` and `node:fs`, nothing else.
@@ -42,7 +42,7 @@ const SIZE = 128;
 const OFF_ACTION_LEN = 0x68;
 const OFF_ACTION = 0x69;
 
-/** The ACTION field is 16 bytes; ACTION_LEN is one byte. See RFC-002 §10.2. */
+/** The ACTION field is 16 bytes; ACTION_LEN is one byte. See AICENT-002 §10.2. */
 export const ACTION_MAX_LEN = 16;
 
 const TOKEN = /^[a-z0-9-]+$/;
@@ -53,7 +53,7 @@ const HASH_INTENT = /^[0-9a-f]{8}$/;
 // ---------------------------------------------------------------------------
 
 /**
- * Parse one `rttp` URI - an implementation written from RFC-002 §10.2 alone,
+ * Parse one `rttp` URI - an implementation written from AICENT-002 §10.2 alone,
  * sharing no code with `src/rttp-uri.mjs`.
  *
  * @param {string} uri

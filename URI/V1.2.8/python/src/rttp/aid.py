@@ -2,7 +2,7 @@
 AID -- Autonomous Identity, derived exactly as demo.rs does.
 
 SHA-256 derives the 256-bit identity DNA as two shards (Genesis^Resonance),
-matching the AID_ORIGIN field (0x46, 256-bit) of RFC-002 sec. 4.1.
+matching the AID_ORIGIN field (0x46, 256-bit) of AICENT-002 sec. 4.1.
 """
 
 import hashlib

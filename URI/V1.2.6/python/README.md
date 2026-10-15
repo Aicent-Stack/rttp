@@ -4,7 +4,7 @@
 128-byte `PulseHeader128` frame, `rttp://` intent addressing, and self-certifying
 Ed25519 seals.**
 
-[RFC-002 §4.1](https://rttp.com/RFC-002/) · [§10](https://rttp.com/RFC-002/) · §11 · v1.2.6
+[AICENT-002 §4.1](https://rttp.com/AICENT-002/) · [§10](https://rttp.com/AICENT-002/) · §11 · v1.2.6
 
 ---
 
@@ -55,11 +55,11 @@ air-gapped reviewer should be able to check the frames.
 
 | Module | What it does | Authority |
 |:---|:---|:---|
-| `rttp.pulse_header` | `PulseHeader128` codec — build / parse / verify the 128-byte hardware-aligned header, including the v1.2.6 extension block at `0x66`–`0x7F` | RFC-002 §4.1 + `SPEC/RTTP-FRAME-EXT-v1.2.6.md` |
-| `rttp.rttp_uri` | Validate, canonicalise and derive `ROUTE_SHARD` from an `rttp` URI | RFC-002 §10.2 / §10.3 ABNF |
+| `rttp.pulse_header` | `PulseHeader128` codec — build / parse / verify the 128-byte hardware-aligned header, including the v1.2.6 extension block at `0x66`–`0x7F` | AICENT-002 §4.1 + `SPEC/RTTP-FRAME-EXT-v1.2.6.md` |
+| `rttp.rttp_uri` | Validate, canonicalise and derive `ROUTE_SHARD` from an `rttp` URI | AICENT-002 §10.2 / §10.3 ABNF |
 | `rttp.seal` | **Managed profile** — symmetric HMAC-SHA256 over a pre-shared key table | — |
 | `rttp.seal_asym` | **Sovereign profile** — Ed25519, self-certifying, no issuance and no registry | `SPEC/RTTP-SEAL-ENVELOPE-v1.2.6.md` (draft) |
-| `rttp.aid` | Autonomous Identity derivation | RFC-001 |
+| `rttp.aid` | Autonomous Identity derivation | AICENT-001 |
 
 Plus `rttp.vectors` — the published conformance vectors, shipped inside the wheel
 so the self-test works from an installed package with no repository checkout.
@@ -79,7 +79,7 @@ parsed["action"]             # 'verify'
 parsed["route_shard"].hex()  # 16-byte routing hash, pure computation
 ```
 
-Addressing is **DNS-free** (RFC-002 §10.5): the routing hash is derived from the
+Addressing is **DNS-free** (AICENT-002 §10.5): the routing hash is derived from the
 authority by SHA-256, so no registry, resolver or network is involved. Malformed
 input is rejected rather than normalised — a case variant is not a spelling
 difference, it is a different string.
@@ -99,7 +99,7 @@ len(raw)                          # 128
 pulse_header.verify(raw)["action"]  # 'verify'
 ```
 
-`build_for_uri` performs the mapping RFC-002 §10.4 promises: the URI's authority
+`build_for_uri` performs the mapping AICENT-002 §10.4 promises: the URI's authority
 becomes `ROUTE_SHARD`, its path becomes `ACTION`. Readers that only understand
 `0x00`–`0x65` keep working — the extension block occupies bytes that were already
 zero, and `VERSION_ID` stays 130.
@@ -191,9 +191,9 @@ needing to trust the authors.
   Provisional (First Come, First Served), **under review**. It is **not yet
   registered** — as of 2026-09-15 the IANA URI Schemes registry contains no
   `rttp` entry. Please describe it that way.
-* **Frame layout** — RFC-002 §4.1, extended by `SPEC/RTTP-FRAME-EXT-v1.2.6.md`.
+* **Frame layout** — AICENT-002 §4.1, extended by `SPEC/RTTP-FRAME-EXT-v1.2.6.md`.
 * **Seal envelope** — `SPEC/RTTP-SEAL-ENVELOPE-v1.2.6.md`, a **draft**: the format
-  is implemented and vector-tested, but it is not yet a numbered RFC-002 section.
+  is implemented and vector-tested, but it is not yet a numbered AICENT-002 section.
 * **Managed profile** — implementation only; it predates the sovereign profile and
   has no standalone specification.
 

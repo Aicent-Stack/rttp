@@ -1,13 +1,13 @@
 """
-rttp_uri -- parse, canonicalise and derive ROUTE_SHARD for `rttp` URIs (RFC-002 sec. 10).
+rttp_uri -- parse, canonicalise and derive ROUTE_SHARD for `rttp` URIs (AICENT-002 sec. 10).
 
-This is the reference implementation of the mapping promised by RFC-002 sec. 10.4:
+This is the reference implementation of the mapping promised by AICENT-002 sec. 10.4:
 "Dereferencing an `rttp` URI emits one pulse ... carrying `action` as the intent
 verb." The specification had the grammar (sec. 10.2 ABNF) but no URI -> frame-field
 mapping; this module and SPEC/RTTP-FRAME-EXT-v1.2.6.md supply that step.
 
 Authority boundary:
-    * the only authority for URI syntax is the RFC-002 sec. 10.2 ABNF; this module
+    * the only authority for URI syntax is the AICENT-002 sec. 10.2 ABNF; this module
       adds none
     * it does two things: validate and canonicalise per sec. 10.2 / sec. 10.3, and
       derive ROUTE_SHARD
@@ -61,7 +61,7 @@ def _check_token(value: str, what: str) -> None:
             continue
         if ch.isupper():
             raise RttpUriError(
-                f"{what} contains uppercase '{ch}' - lowercase US-ASCII only (RFC-002 sec. 10.3)")
+                f"{what} contains uppercase '{ch}' - lowercase US-ASCII only (AICENT-002 sec. 10.3)")
         raise RttpUriError(
             f"{what} contains illegal character {ch!r} "
             f"(allowed: a-z, 0-9, '-')")
@@ -180,7 +180,7 @@ def derive_route_shard(canonical_authority: str) -> bytes:
     if not canonical_authority:
         raise RttpUriError("canonical_authority is empty")
     if canonical_authority != canonical_authority.lower():
-        raise RttpUriError("canonical_authority must be lowercase (RFC-002 sec. 10.3)")
+        raise RttpUriError("canonical_authority must be lowercase (AICENT-002 sec. 10.3)")
     return hashlib.sha256(canonical_authority.encode("ascii")).digest()[:ROUTE_SHARD_BYTES]
 
 

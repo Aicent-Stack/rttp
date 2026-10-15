@@ -1,5 +1,5 @@
 /*
- *  AICENT STACK - RFC-002: RTTP (The Nerve Layer)
+ *  AICENT STACK - AICENT-002: RTTP (The Nerve Layer)
  *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
  *
  *  "Demonstrating 12ns Jitter-Aligned Neural Conduction."
@@ -65,8 +65,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     // 6. Sovereignty Awareness (PICSI Feedback)
-    // Reporting conduction health to the Imperial Eye (RFC-014).
-    println!("\n[METABOLISM] Synchronizing with Imperial Eye (RFC-014)...");
+    // Reporting conduction health to the Imperial Eye (AICENT-014).
+    println!("\n[METABOLISM] Synchronizing with Imperial Eye (AICENT-014)...");
     nerve.current_homeostasis.picsi_resonance_idx = 0.999942;
     nerve.current_homeostasis.metabolic_efficiency = 0.999;
     
@@ -82,6 +82,6 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("PICSI Resonance:   {:.8}", hs.picsi_resonance_idx);
     println!("Precision Mandate: 128-BIT ABSOLUTE");
 
-    println!("\n[FINISH] RFC-002 Demonstration complete. The Grid is Resonant.");
+    println!("\n[FINISH] AICENT-002 Demonstration complete. The Grid is Resonant.");
     Ok(())
 }

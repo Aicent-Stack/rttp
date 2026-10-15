@@ -86,7 +86,7 @@ with zero dependencies and no transport.
 ### Added
 
 * **`rttp.pulse_header`** — `PulseHeader128` codec for the 128-byte
-  hardware-aligned frame header (RFC-002 §4.1), including the v1.2.6 extension
+  hardware-aligned frame header (AICENT-002 §4.1), including the v1.2.6 extension
   block:
   * `SPEC_REV` `0x66` · `FLAGS` `0x67` · `ACTION_LEN` `0x68` · `ACTION` `0x69`(16B)
     · `RESERVED` `0x79`(7B)
@@ -99,7 +99,7 @@ with zero dependencies and no transport.
     rejected, `ACTION` padding must be zero, `ACTION_LEN` must agree with the
     payload
 * **`rttp.rttp_uri`** — validation, canonicalisation and `ROUTE_SHARD`
-  derivation for `rttp://` URIs (RFC-002 §10.2 / §10.3):
+  derivation for `rttp://` URIs (AICENT-002 §10.2 / §10.3):
   * `ROUTE_SHARD = SHA-256(ASCII(canonical_authority))[0:16]` — deterministic,
     pure computation, **no DNS** (§10.5)
   * hash-intent (`8lowhex`) and name-intent forms; open-set `action` vocabulary
@@ -125,7 +125,7 @@ with zero dependencies and no transport.
     `verify_claims()` · `public_bundle()` · `signing_input()`
   * requires the `ed25519` extra; without it every call raises `SealError` with
     the install instruction rather than degrading to an unsigned path
-* **`rttp.aid`** — Autonomous Identity derivation (RFC-001), shared by both
+* **`rttp.aid`** — Autonomous Identity derivation (AICENT-001), shared by both
   profiles so an AID means one thing across the stack.
 * **`rttp.selftest`** — `python -m rttp.selftest`, **53 checks**:
   * 25 conformance vectors (6 positive URIs · 15 rejections · 3 deterministic
@@ -168,14 +168,14 @@ here so nobody has to discover them:
 
 * No transport and no client. The core encodes, addresses and seals; sending is a
   separate package's job.
-* No revocation, and no key rotation story. Both belong to RFC-003.
+* No revocation, and no key rotation story. Both belong to AICENT-003.
 * No replay **cache**: freshness (§3.4) bounds the window, but within it a replayed
   envelope still verifies unless the verifier keeps a short-lived nonce store.
 * No transport-origin binding: the seal proves who signed, not which connection
   delivered it.
 * Rust parity: the published `rttp` crate has no transport layer and no envelope.
   Python and Node are the conforming implementations so far.
-* ~~the browser-registration prefix is accepted because RFC-002 §10.6 requires
+* ~~the browser-registration prefix is accepted because AICENT-002 §10.6 requires
   it…~~ — **superseded 2026-09-17.** That form was removed from both
   specifications and will never be submitted to IANA. `rttp_uri` still accepts it
   as a **tolerance** — a browser hands the handler that string, and refusing it
@@ -188,11 +188,11 @@ here so nobody has to discover them:
   * `positive_uris` — each entry carries `tolerance` (boolean) and `note`. The
     case whose `uri` carries the browser-registration prefix is `tolerance: true`,
     with its reason recorded: it is accepted only because that is the scheme name
-    under which a handler is registered (RFC-002 §10.6) — never because the
+    under which a handler is registered (AICENT-002 §10.6) — never because the
     specification defines it. It is **not** a conformance claim, and the 25-check
     total is unchanged.
   * `negative_uris` — the two case-clause citations were corrected from
-    `(RFC-002 §10.2)` to **`§10.3`**, the clause that actually carries the
+    `(AICENT-002 §10.2)` to **`§10.3`**, the clause that actually carries the
     lowercase rule. §10.2 now appears nowhere in the vector set.
   Regenerated (`SPEC/tools/conformance.py --generate`), replayed (`--check`,
   25/25), and mirrored byte-identically into both packages. After the change:

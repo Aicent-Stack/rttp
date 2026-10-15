@@ -1,7 +1,7 @@
-//! `rttp://` URI codec — validate, canonicalise, derive (RFC-002 §10).
+//! `rttp://` URI codec — validate, canonicalise, derive (AICENT-002 §10).
 //!
 //! Authority boundaries:
-//!   Grammar ......... RFC-002 §10.2 ABNF (sole authority; no syntax added here)
+//!   Grammar ......... AICENT-002 §10.2 ABNF (sole authority; no syntax added here)
 //!   Case discipline . §10.3 (lowercase US-ASCII only) + §10.5 (fail closed)
 //!   Route derivation  ROUTE_SHARD = SHA-256(ASCII(canonical_authority))[0:16]
 //!
@@ -82,7 +82,7 @@ fn check_token(value: &str, what: &str) -> Result<(), RttpUriError> {
     for ch in value.chars() {
         if ch.is_ascii_uppercase() {
             return Err(RttpUriError(format!(
-                "{} contains uppercase '{}' - lowercase US-ASCII only (RFC-002 §10.3)",
+                "{} contains uppercase '{}' - lowercase US-ASCII only (AICENT-002 §10.3)",
                 what, ch
             )));
         }
@@ -135,7 +135,7 @@ pub fn derive_route_shard(canonical_authority: &str) -> Result<[u8; ROUTE_SHARD_
     }
     if canonical_authority != canonical_authority.to_lowercase() {
         return Err(RttpUriError(
-            "canonical_authority must be lowercase (RFC-002 §10.3)".into(),
+            "canonical_authority must be lowercase (AICENT-002 §10.3)".into(),
         ));
     }
     let digest = sha256(canonical_authority.as_bytes());

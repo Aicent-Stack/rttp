@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "rttp"
 version = "1.2.8"
-description = "RTTP reference implementation: PulseHeader128 framing, rttp:// addressing, and self-certifying Ed25519 seals (RFC-002 sec. 4.1 / sec. 10 / sec. 11)."
+description = "RTTP reference implementation: PulseHeader128 framing, rttp:// addressing, and self-certifying Ed25519 seals (AICENT-002 sec. 4.1 / sec. 10 / sec. 11)."
 readme = "README.md"
 requires-python = ">=3.9"
 # PEP 639: an SPDX expression, not a TOML table. The licence classifier was
@@ -42,9 +42,9 @@ dev = ["build>=1.0", "twine>=4.0"]
 [project.urls]
 # Every URL here was checked live on 2026-09-17. Note that `/spec/...` returns
 # 404 on this host -- it is not a valid path; the specification is served at
-# /RFC-002/. A dead Project-URL in published metadata is a permanent dead link.
+# /AICENT-002/. A dead Project-URL in published metadata is a permanent dead link.
 Homepage = "https://rttp.com/"
-Specification = "https://rttp.com/RFC-002/"
+Specification = "https://rttp.com/AICENT-002/"
 
 [project.scripts]
 rttp-selftest = "rttp.selftest:main"

@@ -1,13 +1,13 @@
 """
-rttp_uri — RFC-002 §10 `rttp` URI 解析 / 规范化 / ROUTE_SHARD 派生
+rttp_uri — AICENT-002 §10 `rttp` URI 解析 / 规范化 / ROUTE_SHARD 派生
 
-本模块是 RFC-002 §10.4 所承诺映射的**参考实现**：
+本模块是 AICENT-002 §10.4 所承诺映射的**参考实现**：
     "Dereferencing an `rttp` URI emits one pulse ... carrying `action` as the intent verb."
 规范此前只有语法（§10.2 ABNF），没有「URI → 帧字段」的映射；本模块与
 `SPEC/RTTP-FRAME-EXT-v1.2.6.md` 一起补上这一段。
 
 权威边界（重要）：
-    * URI **语法**唯一权威 = RFC-002 §10.2 ABNF。本模块不新增语法。
+    * URI **语法**唯一权威 = AICENT-002 §10.2 ABNF。本模块不新增语法。
     * 本模块只做两件事：① 按 §10.2/§10.3 校验并**规范化**；② 派生 ROUTE_SHARD。
 
 设计约束（逐条对应规范原文）：
@@ -61,7 +61,7 @@ def _check_token(value: str, what: str) -> None:
         if ch.isupper():
             # §10.3 规范形式为小写。大写**不是**可归一化的书写差异，而是非法输入。
             raise RttpUriError(
-                f"{what} contains uppercase '{ch}' - lowercase US-ASCII only (RFC-002 §10.3)")
+                f"{what} contains uppercase '{ch}' - lowercase US-ASCII only (AICENT-002 §10.3)")
         raise RttpUriError(
             f"{what} contains illegal character {ch!r} "
             f"(allowed: a-z, 0-9, '-')")
@@ -187,7 +187,7 @@ def derive_route_shard(canonical_authority: str) -> bytes:
     if not canonical_authority:
         raise RttpUriError("canonical_authority is empty")
     if canonical_authority != canonical_authority.lower():
-        raise RttpUriError("canonical_authority must be lowercase (RFC-002 §10.3)")
+        raise RttpUriError("canonical_authority must be lowercase (AICENT-002 §10.3)")
     return hashlib.sha256(canonical_authority.encode("ascii")).digest()[:ROUTE_SHARD_BYTES]
 
 

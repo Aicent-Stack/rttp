@@ -1,5 +1,5 @@
 /*
- *  AICENT STACK - RFC-002: RTTP Neural Pulse Frame Header
+ *  AICENT STACK - AICENT-002: RTTP Neural Pulse Frame Header
  *  (C) 2026 Aicent Stack Technical Committee. All Rights Reserved.
  *
  *  "The deterministic wire format for 128-bit sovereign pulses."
@@ -11,7 +11,7 @@
 
 use serde::{Deserialize, Serialize};
 
-/// [RFC-002] RTTP Pulse Frame Header v1.2.5.
+/// [AICENT-002] RTTP Pulse Frame Header v1.2.5.
 /// Optimized for zero-copy parsing and hardware-level NIC offloading (DPDK/eBPF).
 ///
 /// [PERF] Aligned to a 128-byte boundary to match Dual-Cache-Line architecture, 
@@ -27,10 +27,10 @@ pub struct PulseFrameHeader {
     pub flags_128: u128,
     /// The 256-bit cryptographic fingerprint of the sender's AID.
     pub rpki_fingerprint: [u8; 32],
-    /// 128-bit RTBA bid for ZCMK metabolic clearing (RFC-004).
+    /// 128-bit RTBA bid for ZCMK metabolic clearing (AICENT-004).
     /// REPAIRED: Upgraded from u64 to u128 for 2026 financial totality.
     pub zcmk_bid_128: u128,
-    /// 128-bit Semantic Hash for context-aware routing (RFC-001/006).
+    /// 128-bit Semantic Hash for context-aware routing (AICENT-001/006).
     pub semantic_hash_128: u128,
     /// 128-bit nanosecond hardware relative timestamp for 12ns jitter tracking.
     pub timestamp_ns_128: u128,
@@ -38,7 +38,7 @@ pub struct PulseFrameHeader {
     pub priority: u8,
     /// Maximum network hops (TTL).
     pub ttl: u8,
-    /// Reserved for future Imperial Suture (RFC-015 SUNYA).
+    /// Reserved for future Imperial Suture (AICENT-015 SUNYA).
     pub reserved: [u8; 10],
     /// CRC32C hardware integrity checksum.
     pub checksum: u32,
@@ -73,7 +73,7 @@ impl PulseFrameHeader {
     }
 }
 
-/// [RFC-002] Neural Pulse Dispatcher.
+/// [AICENT-002] Neural Pulse Dispatcher.
 /// Primary entry point for inbound buffers from the hardware manifold.
 pub fn on_pulse_received(frame: &[u8]) {
     // 🛡️ [SECURITY AUDIT] Strict boundary enforcement for 128-byte frames.

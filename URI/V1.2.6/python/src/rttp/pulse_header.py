@@ -1,10 +1,10 @@
 """
-PulseHeader128 — RFC-002 §4.1 官方 128 字节硬件对齐帧头
+PulseHeader128 — AICENT-002 §4.1 官方 128 字节硬件对齐帧头
 
 （v1.3.0: 每个神经脉冲封装在临床级 PulseHeader128 中，
   128-BYTE 硬件对齐结构，与 CPU 双缓存行共振。）
 
-字段布局（大端，与 RFC-002 §4.1 表逐一对应）:
+字段布局（大端，与 AICENT-002 §4.1 表逐一对应）:
     0x00  u32   RTTP_MAGIC    0x52545450（物理寄存器门验证）
     0x04  u128  VERSION_ID    锁定 130（v1.3.0-Alpha）
     0x14  u128  SEQUENCE_ID   单调脉冲序号（12ns 审计用）
@@ -70,7 +70,7 @@ def encode_action(action: str) -> bytes:
         return bytes(ACTION_MAX_LEN)
     if not rttp_uri.is_valid_action(action):
         raise PulseHeaderError(
-            f"invalid action token {action!r} (RFC-002 §10.2: 1*( a-z / 0-9 / '-' ))")
+            f"invalid action token {action!r} (AICENT-002 §10.2: 1*( a-z / 0-9 / '-' ))")
     raw = action.encode("ascii")
     if len(raw) > ACTION_MAX_LEN:
         raise PulseHeaderError(
@@ -231,7 +231,7 @@ def verify(raw: bytes, expected_aid_origin: bytes = None) -> dict:
         if any(action_block[len(action.encode("ascii")):]):
             raise PulseHeaderError("ACTION padding must be zero")
         if action and not rttp_uri.is_valid_action(action):
-            raise PulseHeaderError(f"ACTION violates RFC-002 §10.2: {action!r}")
+            raise PulseHeaderError(f"ACTION violates AICENT-002 §10.2: {action!r}")
 
     if expected_aid_origin is not None and \
             fields["aid_origin"] != expected_aid_origin:
