@@ -4,6 +4,10 @@
 `ROUTE_SHARD` derivation, the `PulseHeader128` codec, and the published
 conformance vectors that prove an implementation is right.**
 
+In the two-scheme line: `rttp` resolves **where & when**; the sibling
+[`iqa-org`](https://github.com/Aicent-Stack/iqa-org) crate's `iqa` scheme
+states **whether** -- and where the two agree, action begins.
+
 [AICENT-002 sec. 4.1](https://rttp.com/AICENT-002/) - [sec. 10](https://rttp.com/AICENT-002/) - spec v1.2.6 - zero dependencies (default build) - `#![forbid(unsafe_code)]`
 
 ---
@@ -124,9 +128,9 @@ Nothing in this crate is ever accepted because a check could not be performed.
 
 * **`rttp` URI scheme** -- **registered**: IANA "URI Schemes" registry,
   Provisional, **CRI 27** (2026-09-22), submitted under RFC 7595.
-* **Internet-Draft (IETF)** -- under IETF review as the combined Individual
-  Submission Internet-Draft `draft-li-rttp-iqa-addressing` (revision -00,
-  16 pp., 2026-09-24, informational -- both schemes, one document):
+* **Internet-Draft (IETF)** -- in Independent Submission (ISE) review as the
+  combined Internet-Draft `draft-li-rttp-iqa-addressing` (revision -01,
+  34 pp., 2026-10-27, informational -- both schemes, one document):
   https://datatracker.ietf.org/doc/draft-li-rttp-iqa-addressing/ .
   An Internet-Draft is a working document -- it is not an IETF standard and
   carries no IETF endorsement.
@@ -140,6 +144,33 @@ Where this crate and a specification disagree, **the specification wins and
 the crate is wrong.** Please report it.
 
 ---
+
+## Notes on revision -01 (2026-10-30)
+
+Revision -01 of the combined Internet-Draft (see "Specification status"
+above) is directly relevant to this crate in three ways:
+
+* **sec. 6 -- the trust lease.** Freshness is an in-band property: an answer
+  carries its own lease, checked against the verifier's own clock -- no
+  synchronized infrastructure required. Deployments use 120 seconds,
+  and the window `MAY` be configured. This crate's seal-freshness
+  default follows that model.
+* **sec. 7 -- the two 128-byte wire formats.** The pulse header
+  (`PulseHeader128`, implemented above) and the answer-side attestation
+  envelope (AE-128, implemented in the sibling crate
+  [`iqa-org`](https://github.com/Aicent-Stack/iqa-org)) are both
+  specified on the wire there. The two carriers do not parse each other
+  and MUST NOT be conflated -- the note below stands, now with a
+  normative anchor.
+* **sec. 8 -- the closed refusal vocabulary with grant references.**
+  Denial reasons form a closed set (`evidence_binding_mismatch`,
+  `evidence_expired`, `authority_not_determined`, `authority_revoked`,
+  `operation_not_permitted`), and each refusal carries a grant
+  reference. Consuming code that surfaces this crate's fail-closed
+  results is asked to use that vocabulary.
+
+Where this crate and the I-D disagree, **the I-D wins and the crate is
+wrong.** Please report it.
 
 ## License
 
