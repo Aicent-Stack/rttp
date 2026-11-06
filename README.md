@@ -129,8 +129,8 @@ Nothing in this crate is ever accepted because a check could not be performed.
 * **`rttp` URI scheme** -- **registered**: IANA "URI Schemes" registry,
   Provisional, **CRI 27** (2026-09-22), submitted under RFC 7595.
 * **Internet-Draft (IETF)** -- in Independent Submission (ISE) review as the
-  combined Internet-Draft `draft-li-rttp-iqa-addressing` (revision -01,
-  34 pp., 2026-10-27, informational -- both schemes, one document):
+  combined Internet-Draft `draft-li-rttp-iqa-addressing` (revision -02,
+  40 pp., 2026-11-01, informational -- both schemes, one document):
   https://datatracker.ietf.org/doc/draft-li-rttp-iqa-addressing/ .
   An Internet-Draft is a working document -- it is not an IETF standard and
   carries no IETF endorsement.
@@ -145,9 +145,9 @@ the crate is wrong.** Please report it.
 
 ---
 
-## Notes on revision -01 (2026-10-30)
+## Notes on revision -02 (2026-11-01)
 
-Revision -01 of the combined Internet-Draft (see "Specification status"
+Revision -02 of the combined Internet-Draft (see "Specification status"
 above) is directly relevant to this crate in three ways:
 
 * **sec. 6 -- the trust lease.** Freshness is an in-band property: an answer
