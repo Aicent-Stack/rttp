@@ -7,8 +7,7 @@ conformance vectors that prove an implementation is right.**
 In the two-scheme line: `rttp` resolves **where & when**; the sibling
 [`iqa-org`](https://github.com/Aicent-Stack/iqa-org) crate's `iqa` scheme
 states **whether** -- and where the two agree, action begins.
-
-[AICENT-002 sec. 4.1](https://rttp.com/AICENT-002/) - [sec. 10](https://rttp.com/AICENT-002/) - spec v1.2.6 - zero dependencies (default build) - `#![forbid(unsafe_code)]`
+[AICENT-002 sec. 4.1](https://rttp.com/URI/) - [sec. 10](https://rttp.com/URI/) - spec v1.2.6 - zero dependencies (default build) - `#![forbid(unsafe_code)]`
 
 ---
 
@@ -33,7 +32,7 @@ All offline, no account, no network.
 The three implementations -- Python (`pip install rttp`), JavaScript
 (`npm install @aicent/rttp`), and this one -- **share no code** and agree byte
 for byte on the same published vector set
-(`sha256 4b743e63...`, shipped in all three packages).
+(`sha256 8640e390...`, shipped in all three packages).
 
 ---
 
@@ -88,7 +87,7 @@ were already zero, so readers of the old layout keep working.
 ### Seal -- sovereign envelope (feature `ed25519`)
 
 ```toml
-rttp = { version = "1.3.1", features = ["ed25519"] }
+rttp = { version = "1.3.2", features = ["ed25519"] }
 ```
 
 Ed25519, self-certifying (`AID = SHA-256(public key)`), canonical signing
@@ -118,7 +117,7 @@ Nothing in this crate is ever accepted because a check could not be performed.
 
 | Ecosystem | Name | Status |
 |:---|:---|:---|
-| crates.io | `rttp` | **this crate** -- `1.3.1`, the first formal (non-pre-release) publication; the earlier `1.2.8-alpha` remains published and is not yanked |
+| crates.io | `rttp` | **this crate** -- `1.3.2`; the first formal (non-pre-release) publication was `1.3.1`; the earlier `1.2.8-alpha` remains published and is not yanked |
 | PyPI | `rttp` | **published** -- the Python reference implementation; `pip install rttp` |
 | npm | **`@aicent/rttp`** | **published** -- the JavaScript independent implementation |
 
@@ -128,22 +127,30 @@ Nothing in this crate is ever accepted because a check could not be performed.
 
 * **`rttp` URI scheme** -- **registered**: IANA "URI Schemes" registry,
   Provisional, **CRI 27** (2026-09-22), submitted under RFC 7595.
-* **Internet-Draft (IETF)** -- in Independent Submission (ISE) review as the
-  combined Internet-Draft `draft-li-rttp-iqa-addressing` (revision -02,
+* **Internet-Draft (IETF)** -- under IETF review as the combined Individual
+  Submission Internet-Draft `draft-li-rttp-iqa-addressing` (revision -02,
   40 pp., 2026-11-01, informational -- both schemes, one document):
   https://datatracker.ietf.org/doc/draft-li-rttp-iqa-addressing/ .
+  TXT sha256 `02491c5a59d1e7471be04e8e0d4933dfc22ce19f9b054ead0aa449d6b4485044`.
   An Internet-Draft is a working document -- it is not an IETF standard and
   carries no IETF endorsement.
+* **Conformance records** -- sealed runs and vector families:
+  https://iqa.org/conformance/ ; the published vector sets are pinned at
+  https://iqa.org/challenge/ .
 * **Frame layout** -- AICENT-002 sec. 4.1, extended by `SPEC/RTTP-FRAME-EXT-v1.2.6.md`.
 * **Seal envelope** -- `SPEC/RTTP-SEAL-ENVELOPE-v1.2.6.md`, a **draft**.
 * **AE-128** -- the answer-side counterpart of the pulse frame lives in the
-  sibling crate `iqa-org` 1.3.1 (`iqa_org::envelope`); the two carriers do not
+  sibling crate `iqa-org` 1.3.2 (`iqa_org::envelope`); the two carriers do not
   parse each other and MUST NOT be conflated.
 
 Where this crate and a specification disagree, **the specification wins and
 the crate is wrong.** Please report it.
 
 ---
+
+## License
+
+Apache-2.0. See `LICENSE`.
 
 ## Notes on revision -02 (2026-11-01)
 
