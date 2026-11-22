@@ -128,10 +128,13 @@ Nothing in this crate is ever accepted because a check could not be performed.
 * **`rttp` URI scheme** -- **registered**: IANA "URI Schemes" registry,
   Provisional, **CRI 27** (2026-09-22), submitted under RFC 7595.
 * **Internet-Draft (IETF)** -- under IETF review as the combined Individual
-  Submission Internet-Draft `draft-li-rttp-iqa-addressing` (revision -02,
-  40 pp., 2026-11-01, informational -- both schemes, one document):
+  Submission Internet-Draft `draft-li-rttp-iqa-addressing` (revision -03,
+  44 pp., 2026-11-21, informational -- both schemes, one document):
   https://datatracker.ietf.org/doc/draft-li-rttp-iqa-addressing/ .
-  TXT sha256 `02491c5a59d1e7471be04e8e0d4933dfc22ce19f9b054ead0aa449d6b4485044`.
+  TXT sha256 `73470850daae844c51f281d6acf6d74419bb1b8c762270f1c411469c78cbc52c`.
+  The vector sets shipped in the published packages cite revision -02
+  (TXT sha256 `02491c5a...`); revision -03 preserves the section
+  numbering, so every citation remains valid.
   An Internet-Draft is a working document -- it is not an IETF standard and
   carries no IETF endorsement.
 * **Conformance records** -- sealed runs and vector families:
@@ -175,6 +178,19 @@ above) is directly relevant to this crate in three ways:
   `operation_not_permitted`), and each refusal carries a grant
   reference. Consuming code that surfaces this crate's fail-closed
   results is asked to use that vocabulary.
+
+Where this crate and the I-D disagree, **the I-D wins and the crate is
+wrong.** Please report it.
+
+## Notes on revision -03 (2026-11-21)
+
+Revision -03 (2026-11-21, 44 pp.) preserves the section numbering of -02;
+nothing in this crate changes. The sections this crate implements --
+sec. 4 (URI grammar), sec. 6 (trust lease), sec. 7 (wire formats),
+sec. 8 (refusal vocabulary) -- keep their meaning; -03 adds
+clarifications (response semantics, organ roles, window lengths framed
+as deployment parameters) rather than changes. The vector sets shipped
+in the published 1.3.x packages cite -02 and remain valid.
 
 Where this crate and the I-D disagree, **the I-D wins and the crate is
 wrong.** Please report it.
